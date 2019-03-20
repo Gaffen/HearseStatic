@@ -1,0 +1,5 @@
+build/*
+src/content/posts/*
+!src/content/posts/.gitkeep
+node_modules
+/assets/*
