@@ -5,7 +5,7 @@ const envSettings = require("./environment.config.js");
 const getLoaders = require("./loaders.js");
 const webpack = require("webpack");
 
-const assetsPath = path.resolve(__dirname, "..", "assets");
+const assetsPath = path.resolve(__dirname, "..", "build", "assets");
 
 module.exports = env => {
   let config = {
@@ -16,9 +16,9 @@ module.exports = env => {
     mode: env,
     output: {
       path: assetsPath,
-      filename: "[name]-[hash].js",
-      chunkFilename: "[name]-[chunkhash].js",
-      publicPath: "/"
+      filename: "development" ? "[name].js" : "[name]-[hash].js",
+      chunkFilename: "development" ? "[name].js" : "[name]-[chunkhash].js",
+      publicPath: "/assets/"
     },
     module: {
       rules: getLoaders()

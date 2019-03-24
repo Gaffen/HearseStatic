@@ -1,5 +1,10 @@
 build/*
+!build/fonts
+!build/img
+data/*
+!data/.gitkeep
 src/content/posts/*
 !src/content/posts/.gitkeep
+layouts/partials/sprite.svg
 node_modules
 /assets/*

@@ -24,8 +24,16 @@ $dark-grey: #101010;
 $medium-grey: #262626;
 $light-grey: #464646;
 
-$images_x2: "../images_x2/";
-$images: "../images/";
+$images: "/img/";
+
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
 
 img {
   display: block;
@@ -55,4 +63,8 @@ img {
 .stencil {
   font-family: $stencil;
   font-weight: 100;
+}
+
+.hidden {
+  display: none;
 }

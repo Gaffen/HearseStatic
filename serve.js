@@ -2,6 +2,8 @@ import Promise from "bluebird";
 import co from "co";
 import debounce from "lodash.debounce";
 import compress from "compression";
+import config from "./webpack.config.js";
+import webpack from "webpack";
 
 // Set debug variables
 process.env.NODE_ENV = process.env.NODE_ENV || "development";
@@ -54,41 +56,49 @@ const kill_child = pid =>
   });
 
 // Run build command
-const build_site = debounce((build_assets = true, file_filter = "") => {
-  co(function*() {
-    if (child && typeof child.pid) {
-      info(`Killing ${child.pid}`);
-      yield kill_child(child.pid);
-    }
+const build_site = debounce(
+  (build_assets = true, build_site = true, file_filter = "") => {
+    co(function*() {
+      if (child && typeof child.pid) {
+        info(`Killing ${child.pid}`);
+        yield kill_child(child.pid);
+      }
 
-    info("Building Website");
+      info("Building Website");
 
-    info(`build_assets: ${build_assets}`);
-    info(`file: ${file_filter}`);
+      info(`build_assets: ${build_assets}`);
+      info(`file: ${file_filter}`);
 
-    if (build_assets) {
-      console.log("Webpack Started");
-      console.log("Execute webpack build here");
-      yield run_build_command(`webpack --env ${process.env.NODE_ENV}`);
-      console.log("Webpack Finished");
-    }
+      if (build_assets) {
+        // console.log("Webpack Started");
+        // console.log("Execute webpack build here");
+        // yield run_build_command(
+        //   `webpack --env ${process.env.NODE_ENV} --watch`
+        // );
+        // console.log("Webpack Finished");
+        yield run_build_command(`npm run spritesheet`);
+      }
 
-    info("Build Started");
-    const build_command = ["npm run build"];
+      if (build_site) {
+        info("Build Started");
+        const build_command = ["npm run compile"];
 
-    yield run_build_command(build_command.join(" "));
-    info("Build Finished");
+        yield run_build_command(build_command.join(" "));
+        info("Build Finished");
+      }
 
-    sync.reload();
-    child = void 0;
-  }).catch(err => {
-    sync.sockets.emit("fullscreen:message", {
-      title: err.name,
-      body: strip_ansi(`${err.message}\n\n${err.stack}`),
-      timeout: 5e3
+      child = void 0;
+      sync.reload();
+    }).catch(err => {
+      sync.sockets.emit("fullscreen:message", {
+        title: err.name,
+        body: strip_ansi(`${err.message}\n\n${err.stack}`),
+        timeout: 5e3
+      });
     });
-  });
-}, 200);
+  },
+  200
+);
 
 sync.init(
   {
@@ -114,14 +124,15 @@ sync.init(
           debug(`File changed: ${file}`);
           build_site(false);
         }
-      },
-      {
-        match: [
-          path.join(__dirname, "src", "js", "**", "*"),
-          path.join(__dirname, "src", "scss", "**", "*")
-        ],
-        fn: () => build_site()
       }
+      // {
+      //   match: [
+      //     path.join(__dirname, "src", "js", "**", "*"),
+      //     path.join(__dirname, "src", "scss", "**", "*"),
+      //     path.join(__dirname, "src", "svg", "**", "*")
+      //   ],
+      //   fn: () => build_site(true, false)
+      // }
     ],
     middleware: [
       (req, res, next) => {
@@ -141,5 +152,11 @@ sync.init(
     });
   }
 );
+
+const compiler = webpack(config(process.env.NODE_ENV));
+
+compiler.watch({}, err => {
+  sync.reload();
+});
 
 build_site();

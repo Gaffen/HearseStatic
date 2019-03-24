@@ -3,20 +3,20 @@ const { URL } = require("url");
 const fs = require("fs");
 const path = require("path");
 
-const getContent = url => (files, smith, done) => {
+const getContent = url => {
   const directory = "./src/content/posts";
 
-  fs.readdir(directory, (err, files) => {
-    if (err) throw err;
-
-    for (const file of files) {
-      if (file != ".gitkeep") {
-        fs.unlink(path.join(directory, file), err => {
-          if (err) throw err;
-        });
-      }
-    }
-  });
+  // fs.readdir(directory, (err, files) => {
+  //   if (err) throw err;
+  //
+  //   for (const file of files) {
+  //     if (file != ".gitkeep") {
+  //       fs.unlink(path.join(directory, file), err => {
+  //         if (err) throw err;
+  //       });
+  //     }
+  //   }
+  // });
 
   request
     .get(url)
@@ -49,7 +49,9 @@ const getContent = url => (files, smith, done) => {
         value += "---\n";
         value += post.content.rendered;
 
-        fs.writeFile(`./src/content/posts/${post.slug}.md`, value, function(err) {
+        fs.writeFile(`./src/content/posts/${post.slug}.md`, value, function(
+          err
+        ) {
           if (err) {
             return console.log(err);
           }
@@ -57,8 +59,11 @@ const getContent = url => (files, smith, done) => {
           console.log(`"${post.title.rendered}" was saved!`);
         });
       });
-      done();
+      // done();
     });
 };
+const mainURL = "https://api.gaffen.co.uk";
+const apiURL = "/content/wp/v2/posts";
+const url = `${mainURL}${apiURL}?_embed&per_page=100`;
 
-module.exports = getContent;
+getContent(url);

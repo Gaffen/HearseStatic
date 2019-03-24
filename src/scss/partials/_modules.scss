@@ -1,16 +1,11 @@
 .logo {
   width: 60px;
   height: 33px;
-  // background: url(#{$images}logo.jpg);
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-  only screen and (-o-min-device-pixel-ratio: 3/2),
-  only screen and (min--moz-device-pixel-ratio: 1.5),
-  only screen and (min-device-pixel-ratio: 1.5) {
-  .logo {
-    // background: url(#{$images_x2}logo.jpg);
-    background-size: 60px 33px;
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: #ffffff;
   }
 }
 
@@ -110,45 +105,21 @@
     display: block;
     width: 62px;
     height: 62px;
-    // background: url(#{$images}social_icons.png);
     margin-bottom: 2px;
-    @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-      only screen and (-o-min-device-pixel-ratio: 3/2),
-      only screen and (min--moz-device-pixel-ratio: 1.5),
-      only screen and (min-device-pixel-ratio: 1.5) {
-      // background: url(#{$images_x2}social_icons.png);
-      background-size: 124px 186px;
-      background-position-x: 62px;
-    }
-    background-position-x: 62px;
-    &:hover {
-      background-position-x: 0px;
+    padding: 11px;
+    border: 1px solid $medium-grey;
+    border-radius: 2px;
+    svg {
+      width: 38px;
+      height: 38px;
+      display: block;
+      stroke: white;
+      stroke-width: 10px;
     }
   }
-  .facebook {
-    background-position-y: 0;
-  }
 
-  .twitter {
-    background-position-y: 124px;
-  }
-
-  .soundcloud {
-    background-position-y: 62px;
-  }
   .column {
     display: inline-block;
-  }
-}
-@media only screen and (-webkit-min-device-pixel-ratio: 1.5),
-  only screen and (-o-min-device-pixel-ratio: 3/2),
-  only screen and (min--moz-device-pixel-ratio: 1.5),
-  only screen and (min-device-pixel-ratio: 1.5) {
-  .social {
-    .a {
-      // background: url(#{$images_x2}social_icons.jpg);
-      background-size: 124px 186px;
-    }
   }
 }
 
@@ -160,8 +131,8 @@
   label {
     color: $medium-grey;
     font-weight: bold;
-    position: absolute;
     margin: 6px;
+    display: flex;
   }
   input {
     border: 0;

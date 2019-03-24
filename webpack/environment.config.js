@@ -3,6 +3,7 @@ const resolvers = require("./resolvers.js");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require("webpack-assets-manifest");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const path = require("path");
 const webpack = require("webpack");
@@ -15,6 +16,7 @@ function isProduction(env) {
 
 function getPlugins(env) {
   let plugins = [new webpack.ProgressPlugin({ profile: false })];
+  console.log(env);
   return [
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
     new CleanWebpackPlugin(),
@@ -23,11 +25,11 @@ function getPlugins(env) {
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new MiniCssExtractPlugin({
-      filename: "[name]-[chunkhash].css",
+      filename: env == "development" ? "[name].css" : "[name]-[chunkhash].css",
       chunkFilename: "[id].css"
     }),
     new WebpackAssetsManifest({
-      output: "../assets/manifest.json",
+      output: "../../data/manifest.json",
       transform: (assets, manifest) => {
         let output = {},
           re = /(?:\.([^.]+))?$/;
@@ -47,7 +49,8 @@ function getPlugins(env) {
         });
         return output;
       }
-    })
+    }),
+    new VueLoaderPlugin()
   ];
 }
 
@@ -55,15 +58,15 @@ module.exports = (config, env, target) => {
   if (!isProduction(env)) {
     config.devtool = "cheap-module-source-map";
   } else {
-    config.devtool = "source-map";
+    config.devtool = "eval-source-map";
   }
   config.resolve = resolvers;
-  if (!isProduction(env)) {
-    config.devServer = {
-      contentBase: "./public/",
-      hot: true
-    };
-  }
+  // if (!isProduction(env)) {
+  //   config.devServer = {
+  //     contentBase: "/assets/",
+  //     hot: true
+  //   };
+  // }
   config.plugins = getPlugins(env);
   config.externals = {
     window: "window"

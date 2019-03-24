@@ -19,7 +19,8 @@ module.exports = function() {
         loader: "css-loader",
         options: {
           importLoaders: 1,
-          sourceMap: !production
+          sourceMap: !production,
+          url: false
         }
       },
       {
@@ -59,6 +60,10 @@ module.exports = function() {
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/,
       use: "babel-loader"
+    },
+    {
+      test: /\.vue?$/,
+      use: "vue-loader"
     },
     {
       test: /\.css$/,
