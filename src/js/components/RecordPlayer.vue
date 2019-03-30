@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="RecordPlayer">
+  <div class="RecordPlayer" v-bind:data-record="recordUrl">
     <button class="toggle" v-on:click="togglePlay">
       <svg v-if="playing === false">
         <use :xlink:href="playIcon" />
@@ -44,11 +44,13 @@ export default {
       eqBarCache: null,
       eqBarWidth: 0,
       eqBarRotation: 0,
-      eqSampleSize: 2
+      eqSampleSize: 2,
+      recordUrl: this.record
     };
   },
   mounted: function() {
     this.audioElement = document.createElement("audio");
+    console.log(this.record);
     this.audioElement.src = this.record;
     let disc = this.$refs.disc;
 

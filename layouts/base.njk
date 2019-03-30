@@ -38,8 +38,7 @@ _-_-                                          -__ /\\     ,,
             <use xlink:href="#logo"></use>
           </svg>
         </div>
-        <div class="giglink">
-        </div>
+        {% vue { component:"GigWidget" } %}
       </header>
       <div class="main_banner">
         <img src="img/ep_artwork.jpg" />
@@ -55,6 +54,7 @@ _-_-                                          -__ /\\     ,,
         </div>
       </div>
       <div class="above_fold clearfix">
+        {% vue { component:"RecordPlayer", props: { record: "music/last_time.mp3" } } %}
         <div class="player">
           <div class="ui360 ui360-vis">
           <a href="music/pretty_shiny_things.mp3">Pretty Shiny Things<br/><span>2:49</span></a>

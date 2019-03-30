@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require("webpack-assets-manifest");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const url = require("url");
 
 const path = require("path");
 const webpack = require("webpack");
@@ -31,8 +32,19 @@ function getPlugins(env) {
     new WebpackAssetsManifest({
       output: "../../data/manifest.json",
       transform: (assets, manifest) => {
+        let vueComponents = {};
+        Object.keys(manifest.compiler.records).forEach(e => {
+          if (e.includes(".vue?")) {
+            const compName = e
+              .match(/\/(.*)\.vue/)[1]
+              .split("/")
+              .pop();
+            vueComponents[compName] = url.parse(e.split(" ")[1], true).query.id;
+          }
+        });
         let output = {},
           re = /(?:\.([^.]+))?$/;
+        output.vue = vueComponents;
         Object.keys(assets).forEach(assetName => {
           const batchName = assetName.replace(/\.[^/.]+$/, ""),
             outputName = assets[assetName];
@@ -56,7 +68,7 @@ function getPlugins(env) {
 
 module.exports = (config, env, target) => {
   if (!isProduction(env)) {
-    config.devtool = "cheap-module-source-map";
+    config.devtool = "cheap-module-eval-source-map";
   } else {
     config.devtool = "eval-source-map";
   }
