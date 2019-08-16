@@ -51,7 +51,7 @@ module.exports = function(eleventyConfig) {
         ).default;
 
         const renderer = VueServerRenderer.createRenderer({
-          template: `<div><!--vue-ssr-outlet--></div>`
+          template: `<!--vue-ssr-outlet-->`
         });
 
         moduleScript.template = parsedComponent.template.content;
@@ -60,10 +60,7 @@ module.exports = function(eleventyConfig) {
           moduleScript._scopeId = `data-v-${manifest.vue[args.component]}`;
         }
 
-        console.log(moduleScript);
-
         let component = Vue.component(args.component, moduleScript);
-        console.log(component);
         let props = "";
         if (args.props) {
           props = " ";
@@ -80,7 +77,7 @@ module.exports = function(eleventyConfig) {
             if (!err) {
               callback(null, new nunjucksEngine.runtime.SafeString(result));
             } else {
-              callback(null, "Component render failed");
+              callback(null, err);
             }
           }
         );

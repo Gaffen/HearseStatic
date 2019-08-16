@@ -5,18 +5,14 @@ import compress from "compression";
 import config from "./webpack.config.js";
 import webpack from "webpack";
 
-// Set debug variables
-process.env.NODE_ENV = process.env.NODE_ENV || "development";
-
-if (!process.env.DEBUG) {
-  process.env.DEBUG = "browser-sync-server:*,*:info,*:error";
-}
-
 const debug = require("debug")("browser-sync-server");
 const error = debug.extend("error");
 const info = debug.extend("info");
 
-info("debug", process.env.DEBUG);
+// Set debug variables
+process.env.NODE_ENV = process.env.NODE_ENV || "development";
+
+debug("testing, environment: %", process.env.DEBUG);
 
 // Enable gzip
 const gz = true;
@@ -37,8 +33,11 @@ const run_build_command = command =>
   new Promise((resolve, reject) => {
     child = spawn(command, { stdio: "inherit", shell: true });
     child.on("close", (code, signal) => {
-      if (code || signal) {
-        reject(`Stopped - code: ${code}, signal: ${signal}`);
+      if (code || (signal && signal != "SIGTERM")) {
+        // console.log(`Stopped - code: ${code}, signal: ${signal}`);
+        let err = new Error(`Stopped - code: ${code}, signal: ${signal}`);
+        console.error(err);
+        reject(err);
       } else {
         resolve();
       }
@@ -100,6 +99,8 @@ const build_site = debounce(
   200
 );
 
+build_site();
+
 sync.init(
   {
     server: path.join(__dirname, "build"),
@@ -158,5 +159,3 @@ const compiler = webpack(config(process.env.NODE_ENV));
 compiler.watch({}, err => {
   sync.reload();
 });
-
-build_site();
