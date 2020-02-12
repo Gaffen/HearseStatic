@@ -7,7 +7,12 @@ const gigs = new Vue({
 }).$mount(".GigWidget");
 
 const audio = new Vue({
-  render: h => h(RecordPlayer, { props: { record: "/music/last_time.mp3" } })
+  render: h =>
+    h(RecordPlayer, {
+      props: {
+        record: "https://hearsepileup.rip/music/pretty_shiny_things.mp3"
+      }
+    })
 }).$mount(".RecordPlayer");
 
 const audio2 = new Vue({

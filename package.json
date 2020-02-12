@@ -6,11 +6,11 @@
   "main": "index.js",
   "scripts": {
     "getcontent": "node ./getContent.js",
-    "build": "webpack --env production && npx eleventy",
-    "compile": "npx eleventy",
+    "build": "webpack --env production && eleventy",
+    "compile": "eleventy",
     "start": "npm run devserve",
     "test": "echo \"No test\"",
-    "devserve": "NODE_ENV=development npx babel-node --presets @babel/preset-env ./serve.js",
+    "devserve": "DEBUG=browser-sync-server:*,error:*,info:* NODE_ENV=development babel-node --presets @babel/preset-env ./serve.js",
     "spritesheet": "node ./svgsprite.js"
   },
   "author": "Matthew Gaffen",
