@@ -1,0 +1,27 @@
+.header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.25);
+  z-index: 10;
+  padding: 40px 0;
+  &__logo {
+    width: 100px;
+    height: 60px;
+    float: left;
+    display: block;
+  }
+  &__nav {
+    ul {
+      display: flex;
+      float: right;
+    }
+    a {
+      text-decoration: none;
+    }
+    li {
+      padding: 0 20px;
+    }
+  }
+}

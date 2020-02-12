@@ -50,8 +50,9 @@ export default {
   },
   mounted: function() {
     this.audioElement = document.createElement("audio");
-    console.log(this.record);
     this.audioElement.src = this.record;
+    this.sUsrAg = navigator.userAgent;
+
     let disc = this.$refs.disc;
 
     this.eqBarCache = document.createElement("canvas");
@@ -74,9 +75,15 @@ export default {
         this.audioCtx = new (window.AudioContext ||
           window.webkitAudioContext)();
         this.analyser = this.audioCtx.createAnalyser();
-        this.source = this.audioCtx.createMediaStreamSource(
-          this.audioElement.captureStream()
-        );
+        if (this.sUsrAg.indexOf('Firefox') > -1) {
+          this.source = this.audioCtx.createMediaStreamSource(
+            this.audioElement.mozCaptureStream()
+          );
+        } else {
+          this.source = this.audioCtx.createMediaStreamSource(
+            this.audioElement.captureStream()
+          );
+        }
         this.source.connect(this.analyser);
 
         this.analyser.fftSize = 256;
@@ -94,9 +101,15 @@ export default {
         this.createBarData();
       } else {
         // let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        this.source = this.audioCtx.createMediaStreamSource(
-          this.audioElement.captureStream()
-        );
+        if (this.sUsrAg.indexOf('Firefox') > -1) {
+          this.source = this.audioCtx.createMediaStreamSource(
+            this.audioElement.mozCaptureStream()
+          );
+        } else {
+          this.source = this.audioCtx.createMediaStreamSource(
+            this.audioElement.captureStream()
+          );
+        }
         this.source.connect(this.analyser);
       }
     });
@@ -275,82 +288,86 @@ export default {
       ctx.fill();
     },
     drawEqualizerBars() {
-      let ctx = this.discCtx;
-      let disc = this.$refs.disc;
-      let dataPoints = [];
+      if(this.freqArray){
 
-      let rotateAmount = this.eqBarRotation;
-      // console.log(this.freqArray.length / this.eqSampleSize);
+        let ctx = this.discCtx;
+        let disc = this.$refs.disc;
+        let dataPoints = [];
 
-      for (let i = 0; i < this.freqArray.length; i += this.eqSampleSize) {
-        dataPoints.push(this.freqArray.slice(i, i + this.eqSampleSize));
+        let rotateAmount = this.eqBarRotation;
+        // console.log(this.freqArray.length / this.eqSampleSize);
+
+        for (let i = 0; i < this.freqArray.length; i += this.eqSampleSize) {
+          dataPoints.push(this.freqArray.slice(i, i + this.eqSampleSize));
+        }
+
+        dataPoints.forEach((freqData, i) => {
+          let mean =
+            freqData.reduce((dataPoint, total) => {
+              return total + dataPoint;
+            }, 0) / freqData.length;
+          let multiplier = (mean - 126) / 100;
+          let ringWidth = this.recordSize - this.recordInnerSize;
+
+          let barSize = (this.recordInnerSize + ringWidth * multiplier) / 2;
+
+          barSize = barSize >= 0 ? barSize : 0;
+
+          // if (i === 0) {
+          // 	console.log(barSize, this.recordInnerSize);
+          // }
+
+          ctx.save();
+          ctx.beginPath();
+          // if (barSize < this.recordInnerSize / 2) {
+          ctx.arc(
+            disc.width / 2,
+            disc.height / 2,
+            this.recordInnerSize / 2,
+            0,
+            Math.PI * 2,
+            barSize <= this.recordInnerSize / 2
+          );
+          // }
+
+          // if (i === 3) {
+          // 	console.log(
+          // 		this.playPosition,
+          // 		i / dataPoints.length * 100,
+          // 		this.playPosition < i / dataPoints.length * 100
+          // 	);
+          // }
+
+          ctx.arc(
+            disc.width / 2,
+            disc.height / 2,
+            barSize,
+            0,
+            Math.PI * 2,
+            barSize > this.recordInnerSize / 2
+          );
+          ctx.closePath();
+          ctx.translate(disc.width / 2, disc.height / 2);
+          ctx.rotate(rotateAmount * i);
+          ctx.clip();
+          ctx.drawImage(
+            barSize > this.recordInnerSize / 2 &&
+              this.playPosition < (i / dataPoints.length) * 100
+              ? this.eqBarCache
+              : this.eqBarCacheWhite,
+            /*disc.width / 2*/ 0,
+            -(disc.height / 2)
+          );
+          ctx.rotate(-(rotateAmount * i));
+          ctx.translate(-(disc.width / 2), -(disc.height / 2));
+          ctx.restore();
+        });
       }
-
-      dataPoints.forEach((freqData, i) => {
-        let mean =
-          freqData.reduce((dataPoint, total) => {
-            return total + dataPoint;
-          }, 0) / freqData.length;
-        let multiplier = (mean - 126) / 100;
-        let ringWidth = this.recordSize - this.recordInnerSize;
-
-        let barSize = (this.recordInnerSize + ringWidth * multiplier) / 2;
-
-        barSize = barSize >= 0 ? barSize : 0;
-
-        // if (i === 0) {
-        // 	console.log(barSize, this.recordInnerSize);
-        // }
-
-        ctx.save();
-        ctx.beginPath();
-        // if (barSize < this.recordInnerSize / 2) {
-        ctx.arc(
-          disc.width / 2,
-          disc.height / 2,
-          this.recordInnerSize / 2,
-          0,
-          Math.PI * 2,
-          barSize <= this.recordInnerSize / 2
-        );
-        // }
-
-        // if (i === 3) {
-        // 	console.log(
-        // 		this.playPosition,
-        // 		i / dataPoints.length * 100,
-        // 		this.playPosition < i / dataPoints.length * 100
-        // 	);
-        // }
-
-        ctx.arc(
-          disc.width / 2,
-          disc.height / 2,
-          barSize,
-          0,
-          Math.PI * 2,
-          barSize > this.recordInnerSize / 2
-        );
-        ctx.closePath();
-        ctx.translate(disc.width / 2, disc.height / 2);
-        ctx.rotate(rotateAmount * i);
-        ctx.clip();
-        ctx.drawImage(
-          barSize > this.recordInnerSize / 2 &&
-            this.playPosition < (i / dataPoints.length) * 100
-            ? this.eqBarCache
-            : this.eqBarCacheWhite,
-          /*disc.width / 2*/ 0,
-          -(disc.height / 2)
-        );
-        ctx.rotate(-(rotateAmount * i));
-        ctx.translate(-(disc.width / 2), -(disc.height / 2));
-        ctx.restore();
-      });
     },
     togglePlay: function() {
       if (!this.playing) {
         this.audioElement.play();
+        this.audioElement.volume = 1;
         this.playing = !this.playing;
         this.draw();
       } else {

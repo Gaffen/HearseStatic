@@ -1,0 +1,31 @@
+html {
+  font-size: $bodysize;
+  font-family: $body;
+  color: $white;
+}
+
+body {
+  background: $bg;
+  font-weight: 300;
+  line-height: $bodyline;
+  text-align: center;
+}
+
+h1 {
+  line-height: 1.4em;
+  color: $red;
+}
+
+a {
+  color: currentColor;
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}

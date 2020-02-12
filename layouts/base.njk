@@ -23,6 +23,7 @@ _-_-                                          -__ /\\     ,,
   <meta content="Hearse Pileup; Zombie Rock and Roll" name="description" />
   <meta content="Matt, Gaffen, Matthew, Music, QOTSA, Dead Weather, Tony Hoang, Tone-Deaf Messiah" name="keywords" />
   <link rel="shortcut icon" href="favicon.png" />
+  <link href="https://fonts.googleapis.com/css?family=Oswald:400,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/{{manifest.main.css}}">
 </head>
 <body>
@@ -31,15 +32,25 @@ _-_-                                          -__ /\\     ,,
   </div>
   <div id="wrapper">
     <div id="container" class="main">
-      <header class="main_header">
-        <div class="logo left">
-          <svg>
-            <title>HEARSE PILEUP</title>
-            <use xlink:href="#logo"></use>
-          </svg>
+      <header class="header">
+        <div class="gridwrap">
+          <div class="col col--1">
+            <svg class="header__logo">
+              <title>HEARSE PILEUP</title>
+              <use xlink:href="#logo"></use>
+            </svg>
+            <nav class="header__nav">
+              <ul>
+                <li><a href="">ABOUT</a></li>
+                <li><a href="">MUSIC</a></li>
+                <li><a href="">PRESS KIT</a></li>
+                <li><a href="">CONTACT</a></li>
+              </ul>
+            </nav>
+          </div>
         </div>
-        {% vue { component:"GigWidget" } %}
       </header>
+      {% vue { component:"GigWidget" } %}
       <div class="main_banner">
         <img src="img/ep_artwork.jpg" />
         <div class="main_text">
