@@ -4,6 +4,7 @@ build/*
 data/*
 !data/.gitkeep
 src/content/posts/*
+src/content/index.md
 !src/content/posts/.gitkeep
 layouts/partials/sprite.svg
 node_modules

@@ -1,0 +1,7 @@
+{
+  "minify": true,
+  "options": ["mq", "setClasses"],
+  "feature-detects": [
+    "test/css/objectfit"
+  ]
+}

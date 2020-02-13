@@ -1,20 +1,24 @@
 import Vue from "vue";
-import GigWidget from "./components/GigWidget.vue";
+import Modernizr from "./modernizr";
+// import GigWidget from "./components/GigWidget.vue";
 import RecordPlayer from "./components/RecordPlayer.vue";
 
-const gigs = new Vue({
-  render: h => h(GigWidget)
-}).$mount(".GigWidget");
+// const gigs = new Vue({
+//   render: h => h(GigWidget)
+// }).$mount(".GigWidget");
 
-const audio = new Vue({
-  render: h =>
-    h(RecordPlayer, {
-      props: {
-        record: "https://hearsepileup.rip/music/pretty_shiny_things.mp3"
-      }
-    })
-}).$mount(".RecordPlayer");
+Array.prototype.forEach.call(
+  document.querySelectorAll(".RecordPlayer"),
+  function(elem) {
+    new Vue({
+      render: h =>
+        h(RecordPlayer, {
+          props: JSON.parse(elem.nextElementSibling.innerHTML)
+        })
+    }).$mount(elem);
+  }
+);
 
-const audio2 = new Vue({
-  render: h => h(RecordPlayer)
-}).$mount(".player");
+// const audio2 = new Vue({
+//   render: h => h(RecordPlayer)
+// }).$mount(".player");

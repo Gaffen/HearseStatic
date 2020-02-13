@@ -50,20 +50,9 @@ _-_-                                          -__ /\\     ,,
           </div>
         </div>
       </header>
-      {% vue { component:"GigWidget" } %}
-      <div class="main_banner">
-        <img src="img/ep_artwork.jpg" />
-        <div class="main_text">
-          <h2 class="slab first">The debut EP</h2>
-          <h2 class="stencil">PRETTY SHINY THINGS</h2>
-          <h2 class="slab second">Pretty Shiny Things &nbsp;&#149;&nbsp;  Last Time  &nbsp;&#149;&nbsp;  Generation Y</h2>
-        </div>
-        <div id="ep_cta">
-          <a href="//hearsepileup.bandcamp.com/album/pretty-shiny-things" target="blank_">
-            <h3 class="actiontext slab">ON SALE NOW FOR ONLY &pound;3<br/>CLICK HERE TO PURCHASE</h3>
-          </a>
-        </div>
-      </div>
+      {% block body %}
+
+      {% endblock %}
       <div class="above_fold clearfix">
         {% vue { component:"RecordPlayer", props: { record: "https://hearsepileup.rip/music/pretty_shiny_things.mp3" } } %}
         {# <div class="player">

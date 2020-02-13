@@ -40,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "~styles/partials/base";
+// @import "~styles/partials/base";
 
 .GigWidget {
   border: 1px solid $medium-grey;

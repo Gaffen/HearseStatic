@@ -1,6 +1,17 @@
 {% extends "./base.njk" %}
 
 {% block body %}
-  HERRO BEEPS!! <br/>
-  {{content}}
+  <div class="fullpage"></div>
+  <div class="fullpage fullpage--centred">
+    <div class="fitimg">
+      <img src="{{bandbio.bg.landscape.main_img}}" srcset="{{bandbio.bg.landscape.src_set}}" sizes="100%" alt="">
+    </div>
+    <div class="bandbio">
+      <span class="bandbio__head">
+        <svg><use xlink:href="#monogram"/></svg>
+      </span>
+      <h2>{{bandbio.headline}}</h2>
+      {{bandbio.content | safe}}
+    </div>
+  </div>
 {% endblock %}

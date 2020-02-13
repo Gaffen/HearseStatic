@@ -12,7 +12,7 @@ const webpack = require("webpack");
 const assetsPath = path.resolve(__dirname, "..", "public", "assets");
 
 function isProduction(env) {
-  return env.NODE_ENV === "production";
+  return env === "production";
 }
 
 function getPlugins(env) {
@@ -70,7 +70,7 @@ module.exports = (config, env, target) => {
   if (!isProduction(env)) {
     config.devtool = "cheap-module-eval-source-map";
   } else {
-    config.devtool = "eval-source-map";
+    // config.devtool = "eval-source-map";
   }
   config.resolve = resolvers;
   // if (!isProduction(env)) {
@@ -83,7 +83,7 @@ module.exports = (config, env, target) => {
   config.externals = {
     window: "window"
   };
-  config.optimization = { minimize: !isProduction(env) };
+  config.optimization = { minimize: isProduction(env) };
 
   return config;
 };

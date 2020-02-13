@@ -50,6 +50,7 @@ export default {
   },
   mounted: function() {
     this.audioElement = document.createElement("audio");
+    this.audioElement.crossOrigin = 'anonymous';
     this.audioElement.src = this.record;
     this.sUsrAg = navigator.userAgent;
 
@@ -75,16 +76,11 @@ export default {
         this.audioCtx = new (window.AudioContext ||
           window.webkitAudioContext)();
         this.analyser = this.audioCtx.createAnalyser();
-        if (this.sUsrAg.indexOf('Firefox') > -1) {
-          this.source = this.audioCtx.createMediaStreamSource(
-            this.audioElement.mozCaptureStream()
-          );
-        } else {
-          this.source = this.audioCtx.createMediaStreamSource(
-            this.audioElement.captureStream()
-          );
-        }
+        this.source = this.audioCtx.createMediaElementSource(
+          this.audioElement
+        );
         this.source.connect(this.analyser);
+        this.source.connect(this.audioCtx.destination);
 
         this.analyser.fftSize = 256;
         this.analyser.smoothingTimeConstant = 0.3;
@@ -101,16 +97,13 @@ export default {
         this.createBarData();
       } else {
         // let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if (this.sUsrAg.indexOf('Firefox') > -1) {
-          this.source = this.audioCtx.createMediaStreamSource(
-            this.audioElement.mozCaptureStream()
+        if(!this.source) {
+          this.source = this.audioCtx.createMediaElementSource(
+            this.audioElement
           );
-        } else {
-          this.source = this.audioCtx.createMediaStreamSource(
-            this.audioElement.captureStream()
-          );
+          this.source.connect(this.analyser);
+          this.source.connect(this.audioCtx.destination);
         }
-        this.source.connect(this.analyser);
       }
     });
     this.audioElement.addEventListener("ended", () => {
@@ -367,7 +360,6 @@ export default {
     togglePlay: function() {
       if (!this.playing) {
         this.audioElement.play();
-        this.audioElement.volume = 1;
         this.playing = !this.playing;
         this.draw();
       } else {
