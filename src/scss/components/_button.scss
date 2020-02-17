@@ -1,0 +1,9 @@
+.button, a.button {
+  display: inline-block;
+  border: 2px solid currentColor;
+  padding: 0 20px 0.09em;
+  font-size: $small;
+  font-weight: 500;
+  text-decoration: none;
+  color: currentColor;
+}

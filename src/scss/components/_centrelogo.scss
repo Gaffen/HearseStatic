@@ -1,0 +1,33 @@
+.centrelogo {
+  position: absolute;
+  top: 26px;
+  left: 50%;
+  display: flex;
+  margin-left: -90px;
+  // margin-top: -33px;
+  svg {
+    fill: currentColor;
+  }
+  &__logo {
+    width: 113px;
+    height: 68px;
+    margin-left: 5px;
+    position: relative;
+    bottom: 6px;
+  }
+  &__icon {
+    background: $white;
+    color: $black;
+    width: 62px;
+    height: 62px;
+    padding: 13px 0 0 0;
+    svg {
+      width: 39px;
+      height: 36px;
+      margin: auto;
+    }
+  }
+  svg, span {
+    display: block;
+  }
+}

@@ -1,17 +1,69 @@
 {% extends "./base.njk" %}
 
 {% block body %}
-  <div class="fullpage"></div>
-  <div class="fullpage fullpage--centred">
+  <div class="fullpage fullpage--white section"></div>
+  <div class="fullpage fullpage--centred section">
     <div class="fitimg">
       <img src="{{bandbio.bg.landscape.main_img}}" srcset="{{bandbio.bg.landscape.src_set}}" sizes="100%" alt="">
     </div>
-    <div class="bandbio">
-      <span class="bandbio__head">
-        <svg><use xlink:href="#monogram"/></svg>
+    <div class="gridwrap">
+      <div class="iconbox">
+        <span class="iconbox__icon">
+          <svg><use xlink:href="#monogram"/></svg>
+        </span>
+        <div class="col col--3-5 col--centred">
+          <h2>{{bandbio.headline}}</h2>
+          {{bandbio.content | safe}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fullpage fullpage--centred fullpage--white section">
+    {% for track in music %}
+      <div class="record">
+        {% vue { component:"RecordPlayer", props: { record: track.audio, artwork: track.cover_art } } %}
+        <h3>{{track.title | upper}}</h3>
+        <p><a class="button button--black" href="">MORE</a></p>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="gridwrap section">
+    <div class="col col--3-5 col--centred">
+      <span class="iconbox__icon">
+        <svg><use xlink:href="#download"/></svg>
       </span>
-      <h2>{{bandbio.headline}}</h2>
-      {{bandbio.content | safe}}
+      <h2>DIGITAL PRESS KIT</h2>
+      <p>{{dpk.title}}</p>
+      <p><a href="{{dpk.link}}" class="button">VISIT LINK</a></p>
+    </div>
+  </div>
+  <div class="section--white group">
+    <div class="section gridwrap divider gridwrap--flex">
+      <div class="col col--2-5">
+        <ul class="social">
+          <li>
+            <a href="https://facebook.com/HearsePileup" target="_blank">
+              <svg class="icon">
+                <use xlink:href="#fb"></use>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/hearsepileup/" target="_blank">
+              <svg class="icon">
+                <use xlink:href="#ig"></use>
+              </svg>
+            </a>
+          </li>
+        </ul>
+        <h2>SOCIAL</h2>
+        <p>We can be found on a variety of platforms but we are most active on the above two, so for regular updates follow us.</p>
+      </div>
+      <div class="col col--2-5">
+        <h2>LICENCING</h2>
+        <p>All of our music is released under a creative commons by attribution share alike license.</p>
+        <p><a href="" class="button">MORE</a></p>
+      </div>
     </div>
   </div>
 {% endblock %}

@@ -3,6 +3,7 @@ build/*
 !build/img
 data/*
 !data/.gitkeep
+!data/footer.js
 src/content/posts/*
 src/content/index.md
 !src/content/posts/.gitkeep

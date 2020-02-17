@@ -3,9 +3,11 @@
   width: 100%;
   top: 0;
   left: 0;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.15);
   z-index: 10;
   padding: 40px 0;
+  color: $black;
+  font-weight: bold;
   &__logo {
     width: 100px;
     height: 60px;
@@ -22,6 +24,9 @@
     }
     li {
       padding: 0 20px;
+      &:last-child {
+        padding-right: 0;
+      }
     }
   }
 }

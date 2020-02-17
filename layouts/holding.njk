@@ -30,29 +30,26 @@ _-_-                                          -__ /\\     ,,
   <div class="hidden">
     {% include "./partials/sprite.svg" %}
   </div>
-  <div id="wrapper">
-    <div id="container" class="main">
-      <header class="header">
-        <div class="gridwrap">
-          <div class="col col--1">
-            <svg class="header__logo">
-              <title>HEARSE PILEUP</title>
-              <use xlink:href="#logo"></use>
-            </svg>
-            <nav class="header__nav">
-              <ul>
-                <li><a href="">ABOUT</a></li>
-                <li><a href="">MUSIC</a></li>
-                <li><a href="">PRESS KIT</a></li>
-                <li><a href="">CONTACT</a></li>
-              </ul>
-            </nav>
-          </div>
+  <div class="holding">
+    <div id="container" class="holding__frame">
+      <div class="centrelogo">
+        <span class="centrelogo__icon">
+          <svg>
+            <use xlink:href="#monogram"></use>
+          </svg>
+        </span>
+        <svg class="centrelogo__logo">
+          <use xlink:href="#logo"></use>
+        </svg>
+      </div>
+      <div class="holding__content">
+        <div>
+          <h2>GRINDSTONE</h2>
+          <p>RELEASING 01/03/2020</p>
+          <p><a href="https://facebook.com/HearsePileup" target="_blank">FACEBOOK</a> / <a href="https://instagram.com/hearsepileup" target="_blank">INSTAGRAM</a></p>
         </div>
-      </header>
-      {% block body %}
-
-      {% endblock %}
+      </div>
+      <p class="copyleft">CC Hearse Pileup {{footer.currentYear}} - Attribution - Non-Commercial.</p>
     </div>
   </div>
   <script src="/assets/{{manifest.main.js}}"></script>

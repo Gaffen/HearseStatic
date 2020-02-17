@@ -1,0 +1,21 @@
+.holding {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 100vh;
+  &__frame {
+    display: flex;
+    padding-top: 59px;
+    min-height: calc(50vh + 59px);
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__content {
+    text-align: center;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+}

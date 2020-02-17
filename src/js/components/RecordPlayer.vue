@@ -1,11 +1,9 @@
 <template lang="html">
-  <div class="RecordPlayer" v-bind:data-record="recordUrl">
+  <div class="RecordPlayer" :data-record="recordUrl" :data-artwork="artworkObj" data-test>
     <button class="toggle" v-on:click="togglePlay">
-      <svg v-if="playing === false">
-        <use :xlink:href="playIcon" />
-      </svg>
-      <svg v-else>
-        <use :xlink:href="pauseIcon" />
+      <svg class="icon">
+        <use v-if="playing === false" xlink:href="#playbutton" />
+        <use v-else xlink:href="#pausebutton" />
       </svg>
     </button>
     <canvas
@@ -15,21 +13,20 @@
       v-bind:height="canvasSize"
       v-on:mousedown="beginScrubbing"
     />
-    <p class="devinfo">Scrubbing: {{ scrubbing }}</p>
+    <img :src="artworkMainImg" :srcset="artworkSrcSet" sizes="160px" class="artwork"/>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["record"],
+  props: ["record", "artwork"],
   data: function(args) {
     let maxRecordSize = 320 - 40;
     let maxRecordInnerSize = 100;
+    let artwork = JSON.parse(this.artwork).landscape;
     return {
       playing: false,
       scrubbing: false,
-      playIcon: "#playbutton",
-      pauseIcon: "#pausebutton",
       playPosition: 0,
       buffered: 0,
       mousePos: null,
@@ -45,7 +42,10 @@ export default {
       eqBarWidth: 0,
       eqBarRotation: 0,
       eqSampleSize: 2,
-      recordUrl: this.record
+      recordUrl: this.record,
+      artworkMainImg: artwork.main_img,
+      artworkSrcSet: artwork.src_set,
+      artworkObj: this.artwork
     };
   },
   mounted: function() {
@@ -159,25 +159,25 @@ export default {
       let ctx = this.discCtx;
       let disc = this.$refs.disc;
 
-      // Outer ring
-      ctx.lineWidth = 3;
-      ctx.beginPath();
-      ctx.strokeStyle = "rgb(38, 38, 38)";
-      ctx.arc(
-        disc.width / 2,
-        disc.height / 2,
-        disc.width / 2 - 4,
-        0,
-        Math.PI * 2
-      );
-      ctx.closePath();
-      ctx.stroke();
-
-      // Inner Ring
-      ctx.beginPath();
-      ctx.arc(disc.width / 2, disc.height / 2, 80 / 2, 0, Math.PI * 2);
-      ctx.closePath();
-      ctx.stroke();
+      // // Outer ring
+      // ctx.lineWidth = 3;
+      // ctx.beginPath();
+      // ctx.strokeStyle = "rgb(38, 38, 38)";
+      // ctx.arc(
+      //   disc.width / 2,
+      //   disc.height / 2,
+      //   disc.width / 2 - 4,
+      //   0,
+      //   Math.PI * 2
+      // );
+      // ctx.closePath();
+      // ctx.stroke();
+      //
+      // // Inner Ring
+      // ctx.beginPath();
+      // ctx.arc(disc.width / 2, disc.height / 2, 80 / 2, 0, Math.PI * 2);
+      // ctx.closePath();
+      // ctx.stroke();
 
       if (this.initialised) {
         this.drawRecord();
@@ -422,8 +422,11 @@ export default {
 }
 
 .disc {
+  position: relative;
+  z-index: 1;
   width: 160px;
   height: 160px;
+  opacity: 0.75;
 
   &:hover {
     cursor: pointer;
@@ -432,14 +435,14 @@ export default {
 
 .toggle {
   position: absolute;
-  width: 38px;
-  height: 38px;
-  top: 61px;
-  left: 61px;
-  border: 0;
-  background: none;
+  width: 44px;
+  height: 44px;
+  top: 58px;
+  left: 58px;
+  border: 2px solid black;
+  background: white;
   border-radius: 50%;
-  background: linear-gradient(#191919, #000);
+  z-index: 2;
 
   &:focus {
     outline: none;
@@ -447,23 +450,31 @@ export default {
 
   &:hover {
     cursor: pointer;
-    background: linear-gradient(#000, #191919);
   }
 
   svg {
-    fill: white;
+    fill: black;
     width: 10px;
     height: 10px;
     display: block;
     margin: auto;
+    display: block;
   }
 }
 
-.devinfo {
+.artwork {
   position: absolute;
-  top: 100%;
-  width: 100%;
-  display: block;
-  text-align: center;
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  border-radius: 50%;
 }
+
+// .devinfo {
+//   position: absolute;
+//   top: 100%;
+//   width: 100%;
+//   display: block;
+//   text-align: center;
+// }
 </style>

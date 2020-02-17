@@ -35,7 +35,7 @@ module.exports = function(eleventyConfig) {
       includes: "../../layouts",
       data: "../../data"
     },
-    templateFormats: ["json", "md", "njk"],
+    templateFormats: ["md", "njk"],
     passthroughFileCopy: false
   };
 };
