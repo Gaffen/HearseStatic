@@ -13,7 +13,7 @@
     "devserve": "DEBUG=browser-sync-server:*,error:*,info:* NODE_ENV=development babel-node --presets @babel/preset-env ./serve.js",
     "spritesheet": "node ./svgsprite.js",
     "modernizr": "npx modernizr -c .modernizrrc.json -d src/js/modernizr.js -u",
-    "generate": "npm run modernizr && npm run spritesheet && npm run build"
+    "generate": "npm run getcontent && npm run modernizr && npm run spritesheet && npm run build"
   },
   "author": "Matthew Gaffen",
   "license": "GPL-3.0-or-later",
