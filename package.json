@@ -1,8 +1,8 @@
 {
-  "name": "gaffen.co.uk",
+  "name": "hearsewebsite",
   "version": "0.0.1",
-  "description": "Gaffen.co.uk",
-  "repository": "https://github.com/Gaffen/Gaffen.co.uk.git",
+  "description": "hearsepileup.rip",
+  "repository": "https://github.com/Gaffen/HearseStatic",
   "main": "index.js",
   "scripts": {
     "getcontent": "node ./getContent.js",
