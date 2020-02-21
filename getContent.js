@@ -27,7 +27,7 @@ const getContent = url => {
       res.data.forEach((item, i) => {
 
         if(item.slug == "home"){
-          item.layout = "home.njk";
+          item.layout = "holding.njk";
           item.slug = "index";
         }
 
