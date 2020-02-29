@@ -2,7 +2,7 @@
   "name": "hearsepileup.rip",
   "version": "0.0.1",
   "description": "hearsepileup.rip",
-  "repository": "https://github.com/Gaffen/Gaffen.co.uk.git",
+  "repository": "https://github.com/Gaffen/HearseStatic",
   "browserslist": "> 0.25%, not dead",
   "main": "index.js",
   "scripts": {
