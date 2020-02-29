@@ -1,0 +1,57 @@
+.trackinfo {
+  text-align: left;
+  position: relative;
+  @include breakpoint(small){
+    display: flex;
+  }
+  h1 {
+    text-transform: none;
+    margin: -0.13em 0 0 0;
+    position: relative;
+    line-height: 1em;
+    padding-bottom: 18px;
+    border-bottom: 1px solid $light-grey;
+  }
+  &__art {
+    margin-bottom: 40px;
+    @include breakpoint(small){
+      margin-bottom: 0px;
+    }
+    img {
+      display: block;
+    }
+  }
+  &__description {
+    @include breakpoint(small){
+      display: flex;
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      flex-direction: column;
+    }
+  }
+  &__text {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    font-weight: 400;
+    strong, h2, h3, h4 {
+      font-weight: 600;
+    }
+  }
+  &__actions {
+    border-top: 1px solid $light-grey;
+    display: flex;
+    padding-top: 30px;
+    font-size: 14px;
+    flex-direction: column;
+    text-align: center;
+    @include breakpoint(320px){
+      flex-direction: row;
+      text-align: left;
+    }
+    span {
+      padding: 0 24px;
+    }
+  }
+}

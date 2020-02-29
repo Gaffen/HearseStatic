@@ -15,17 +15,19 @@ Array.prototype.forEach.call(
   }
 );
 
+// if(Modernizr.webaudio){
 Array.prototype.forEach.call(
   document.querySelectorAll(".RecordPlayer"),
   function(elem) {
     new Vue({
       render: h =>
         h(RecordPlayer, {
-          props: JSON.parse(elem.nextElementSibling.innerHTML)
+          props:JSON.parse(elem.nextElementSibling.innerHTML)
         })
     }).$mount(elem);
   }
 );
+// }
 
 Array.prototype.forEach.call(
   document.querySelectorAll(".fullpage__downarrow"),

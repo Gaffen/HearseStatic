@@ -32,6 +32,10 @@
       float: right;
       padding: 0;
       margin: 0;
+      flex-direction: column;
+      @include breakpoint(small){
+        flex-direction: row;
+      }
     }
     a {
       text-decoration: none;

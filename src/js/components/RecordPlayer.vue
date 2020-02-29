@@ -1,5 +1,8 @@
 <template lang="html">
   <div class="RecordPlayer" :data-record="recordUrl" :data-artwork="artworkObj" data-test>
+    <a v-if="!hideFallback" :href="recordUrl">
+      PLAY AUDIO
+    </a>
     <button class="toggle" v-on:click="togglePlay">
       <svg class="icon">
         <use v-if="playing === false" xlink:href="#playbutton" />
@@ -25,6 +28,7 @@ export default {
     let maxRecordInnerSize = 100;
     let artwork = JSON.parse(this.artwork).landscape;
     return {
+      hideFallback: false,
       playing: false,
       scrubbing: false,
       playPosition: 0,
@@ -49,6 +53,9 @@ export default {
     };
   },
   mounted: function() {
+    if(Modernizr.webaudio){
+      this.hideFallback = true;
+    }
     this.audioElement = document.createElement("audio");
     this.audioElement.crossOrigin = 'anonymous';
     this.audioElement.src = this.record;
@@ -468,6 +475,16 @@ export default {
   left: 2px;
   width: calc(100% - 4px);
   border-radius: 50%;
+}
+
+a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
 }
 
 // .devinfo {

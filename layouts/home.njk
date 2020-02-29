@@ -46,7 +46,7 @@
       <div class="record">
         {% vue { component:"RecordPlayer", props: { record: track.audio, artwork: track.cover_art } } %}
         <h3>{{track.title | upper}}</h3>
-        <p><a class="button button--black" href="">MORE</a></p>
+        <p><a class="button button--black  launch__lightbox" href="/tracks/{{track.slug}}"  data-lightbox-type="iframe">MORE</a></p>
       </div>
     {% endfor %}
   </div>
@@ -87,7 +87,7 @@
       <div class="col col--2-5">
         <h2>LICENCING</h2>
         <p>All of our music is released under a creative commons by attribution share alike license.</p>
-        <p><a href="/creative-commons" data-lightbox-type="iframe" class="button launch__lightbox lightbox--iframe">MORE</a></p>
+        <p><a href="/creative-commons" data-lightbox-type="iframe" class="button launch__lightbox">MORE</a></p>
       </div>
     </div>
   </div>

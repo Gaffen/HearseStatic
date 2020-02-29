@@ -1,7 +1,11 @@
 {
   "minify": true,
-  "options": ["mq", "setClasses"],
+  "options": [
+    "mq",
+    "setClasses"
+  ],
   "feature-detects": [
+    "test/audio/webaudio",
     "test/css/objectfit"
   ]
 }

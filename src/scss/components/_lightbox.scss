@@ -1,6 +1,9 @@
 .lightbox {
   display: table-cell;
   vertical-align: middle;
+  &:hover {
+    cursor: auto;
+  }
 
   &--wrap {
     margin: 40px;
@@ -24,15 +27,18 @@
     background-color: rgba(0, 0, 0, 0.9);
     display: none;
     transition: opacity 0.15s ease;
+    &:hover {
+      cursor: pointer;
+    }
     &[data-type="iframe"]{
-      .lightbox--wrap, .lightbox {
+      .lightbox--content, .lightbox {
         height: 100%;
       }
     }
   }
 
   &--content {
-    max-width: calc(100% - 60px);
+    max-width: 100%;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;

@@ -1,6 +1,10 @@
 {% extends "./iframe.njk" %}
 
 {% block body %}
-  <h1>{{title.rendered}}</h1>
-  {{content | safe}}
+  <div class="gridwrap">
+    <div class="col--2-3 col col--centred content">
+      <h1>{{title.rendered}}</h1>
+      {{content | safe}}
+    </div>
+  </div>
 {% endblock %}

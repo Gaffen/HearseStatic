@@ -1,13 +1,15 @@
 .divider {
-  &:before {
-    display: block;
-    content: " ";
-    position: absolute;
-    left: 50%;
-    margin-left: -10px;
-    width: 20px;
-    background: $light-grey;
-    height: calc(100% - 100px);
-    top: 50px;
+  @include breakpoint(small){
+    &:before {
+      display: block;
+      content: " ";
+      position: absolute;
+      left: 50%;
+      margin-left: -10px;
+      width: 20px;
+      background: $light-grey;
+      height: calc(100% - 100px);
+      top: 50px;
+    }
   }
 }
