@@ -2,6 +2,7 @@ html {
   font-size: $bodysize;
   font-family: $body;
   color: $white;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -12,8 +13,9 @@ body {
 }
 
 h1 {
-  line-height: 1.4em;
-  color: $red;
+  line-height: 2em;
+  font-size: 40px;
+  text-transform: uppercase;
 }
 
 h2 {

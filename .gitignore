@@ -6,6 +6,7 @@ data/*
 !data/footer.js
 src/content/posts/*
 src/content/index.md
+src/content/creative-commons.md
 !src/content/posts/.gitkeep
 layouts/partials/sprite.svg
 node_modules

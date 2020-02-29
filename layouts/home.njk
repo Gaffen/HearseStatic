@@ -1,8 +1,30 @@
 {% extends "./base.njk" %}
+{% from "partials/rimg.njk" import rimg %}
 
 {% block body %}
-  <div class="fullpage fullpage--white section"></div>
+  <div class="fullpage fullpage--white section">
+    <div class="announcements">
+      {% for announcement in announcements.slides %}
+        <div class="announcements__slide">
+          <div class="fitimg">
+            {{rimg(announcement.img.landscape, announcement.img.portrait)}}
+          </div>
+          {% if announcement.slide_type == 'banner' and announcement.slide_link %}
+            <a class="announcements__cta button" href="{{announcement.slide_link}}">
+              {{announcement.link_text if announcement.link_text else "MORE"}}
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <button class="fullpage__downarrow">
+      <svg>
+        <use xlink:href="#downarr"></use>
+      </svg>
+    </button>
+  </div>
   <div class="fullpage fullpage--centred section">
+    <a class="fullpage__anchor" id="about"></a>
     <div class="fitimg">
       <img src="{{bandbio.bg.landscape.main_img}}" srcset="{{bandbio.bg.landscape.src_set}}" sizes="100%" alt="">
     </div>
@@ -19,6 +41,7 @@
     </div>
   </div>
   <div class="fullpage fullpage--centred fullpage--white section">
+    <a class="fullpage__anchor" id="music"></a>
     {% for track in music %}
       <div class="record">
         {% vue { component:"RecordPlayer", props: { record: track.audio, artwork: track.cover_art } } %}
@@ -28,6 +51,7 @@
     {% endfor %}
   </div>
   <div class="gridwrap section">
+    <a class="fullpage__anchor" id="press"></a>
     <div class="col col--3-5 col--centred">
       <span class="iconbox__icon">
         <svg><use xlink:href="#download"/></svg>
@@ -62,8 +86,10 @@
       <div class="col col--2-5">
         <h2>LICENCING</h2>
         <p>All of our music is released under a creative commons by attribution share alike license.</p>
-        <p><a href="" class="button">MORE</a></p>
+        <p><a href="/creative-commons" data-lightbox-type="iframe" class="button launch__lightbox lightbox--iframe">MORE</a></p>
       </div>
     </div>
   </div>
+  <a class="fullpage__anchor" id="contact"></a>
+  {% include "partials/lightbox.njk" %}
 {% endblock %}

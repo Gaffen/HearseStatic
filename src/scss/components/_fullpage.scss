@@ -10,4 +10,26 @@
     background: $white;
     color: $black;
   }
+  &__anchor {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  &__downarrow {
+    position: absolute;;
+    z-index: 3;
+    bottom: 0;
+    background: none;
+    border: 0;
+    padding: 20px;
+    margin-left: -35px;
+    width: 70px;
+    svg {
+      display: block;
+      width: 30px;
+      height: 18px;
+      stroke: $white;
+      stroke-width: 1px;
+    }
+  }
 }

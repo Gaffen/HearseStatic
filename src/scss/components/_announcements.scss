@@ -1,0 +1,16 @@
+.announcements {
+  color: $white;
+  .button {
+    font-size: 36px;
+    line-height: 1.7em;
+  }
+  &__cta {
+    position: absolute;
+    bottom: 88px;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $black;
+    border: 2px solid $white;
+  }
+}

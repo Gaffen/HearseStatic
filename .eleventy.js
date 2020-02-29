@@ -30,7 +30,7 @@ module.exports = function(eleventyConfig) {
 
   return {
     dir: {
-      input: "src/content",
+      input: "src/content/*.md",
       output: "build",
       includes: "../../layouts",
       data: "../../data"

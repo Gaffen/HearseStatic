@@ -3,24 +3,39 @@
   width: 100%;
   top: 0;
   left: 0;
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.9);
   z-index: 10;
-  padding: 40px 0;
+  padding: 0;
   color: $black;
   font-weight: bold;
+  &__strip {
+    background: $black;
+    padding: 3px 0 2px;
+  }
   &__logo {
-    width: 100px;
-    height: 60px;
-    float: left;
     display: block;
+    svg {
+      width: 80px;
+      height: 48px;
+      display: block;
+    }
+  }
+  &__outer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 0;
   }
   &__nav {
     ul {
       display: flex;
       float: right;
+      padding: 0;
+      margin: 0;
     }
     a {
       text-decoration: none;
+      font-size: 18px;
     }
     li {
       padding: 0 20px;

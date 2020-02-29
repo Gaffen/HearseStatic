@@ -1,0 +1,25 @@
+{% macro rimg(land, port, sizes, class, alt) %}
+
+  {% if not sizes %}
+    {% set sizes = '100vw' %}
+  {% endif %}
+
+  {% if port and land %}
+    <picture {{ 'class="' + class + '"' if class }} alt="{{alt}}">
+			<!--[if IE 9]><video style="display: none;"><![endif]-->
+      <source media="(orientation: landscape)" sizes="{{sizes}}" srcset="{{land.src_set}}">
+      <source media="(orientation: portrait)" sizes="{{sizes}}" srcset="{{port.src_set}}">
+      <!--[if IE 9]></video><![endif]-->
+      <img src="{{land.main_img}}" srcset="{{land.src_set}}" sizes="{{sizes}}" alt="{{alt}}">
+    </picture>
+  {% elseif land or port %}
+    {% if land %}
+      <img src="{{land.main_img}}" {{ 'class="' + class + '"' if class }} sizes="{{sizes}}" srcset="{{land.src_set}}" alt="{{alt}}">
+    {% else %}
+      <img src="{{port.main_img}}" {{ 'class="' + class + '"' if class }} sizes="{{sizes}}" srcset="{{port.src_set}}" alt="{{alt}}">
+    {% endif %}
+  {% else %}
+    Please provide either portrait or landscape image
+  {% endif %}
+  {#{dump([[land.width, (land.width * 0.66825775656325)|round], land.sizes[imgsize ~ '320'], imgmeta, land.id])}#}
+{% endmacro %}

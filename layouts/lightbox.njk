@@ -1,0 +1,6 @@
+{% extends "./iframe.njk" %}
+
+{% block body %}
+  <h1>{{title.rendered}}</h1>
+  {{content | safe}}
+{% endblock %}

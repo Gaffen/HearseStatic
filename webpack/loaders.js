@@ -57,7 +57,7 @@ module.exports = function() {
       options: {}
     },
     {
-      test: /\.jsx?$/,
+      test: /\.js?$/,
       exclude: /(node_modules|bower_components)/,
       use: "babel-loader"
     },
