@@ -27,10 +27,15 @@ module.exports = function(eleventyConfig) {
     console.log(value);
     return `<pre>${value ? JSON.stringify(value) : "Variable undefined"}</pre>`;
   });
+  eleventyConfig.addCollection("tracks", collection => {
+    let tracks = collection.getFilteredByGlob("src/content/tracks/*.md");
+    return tracks;
+  });
+
 
   return {
     dir: {
-      input: "src/content/*.md",
+      input: "src/content",
       output: "build",
       includes: "../../layouts",
       data: "../../data"

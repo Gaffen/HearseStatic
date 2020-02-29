@@ -4,23 +4,23 @@ const fs = require("fs");
 const path = require("path");
 
 const getContent = url => {
-  const directory = "./src/content/posts";
+  const tracksDirectory = "./src/content/tracks";
   const pagesEndPoint = "/pages";
   const postsEndPoint = "/posts";
   const tracksEndPoint = "/track";
 
-  // fs.readdir(directory, (err, files) => {
+  // fs.readdir(tracksDirectory, (err, files) => {
   //   if (err) throw err;
   //
   //   for (const file of files) {
   //     if (file != ".gitkeep") {
-  //       fs.unlink(path.join(directory, file), err => {
+  //       fs.unlink(path.join(tracksDirectory, file), err => {
   //         if (err) throw err;
   //       });
   //     }
   //   }
   // });
-  //
+
 
   request
     .get(`${url}${pagesEndPoint}?_embed&slug[]=home&slug[]=creative-commons`)
@@ -61,7 +61,7 @@ const getContent = url => {
             return console.log(err);
           }
 
-          console.log(`"${item.title}" was saved!`);
+          console.log(`Page "${item.title}" was saved!`);
         });
       });
 
@@ -84,30 +84,24 @@ const getContent = url => {
       allTracks.forEach(track => {
   //       console.log();
         const key = `./tracks/${track.slug}/index.html`;
-        let frontmatter = {
-          layout: "track.njk",
-          title: track.title.rendered,
-          date: track.date,
-          collection: "tracks"
-        };
-        const frontmatterKeys = Object.keys(frontmatter);
-        console.log(track);
-        // let value = "---\n";
-        // value += `${frontmatterKeys
-  //         .map(key => `${key}: ${frontmatter[key]}\n`)
-  //         .join("")}`;
-  //       value += "---\n";
-  //       value += post.content.rendered;
-  //
-  //       fs.writeFile(`./src/content/posts/${post.slug}.md`, value, function(
-  //         err
-  //       ) {
-  //         if (err) {
-  //           return console.log(err);
-  //         }
-  //
-  //         console.log(`"${post.title.rendered}" was saved!`);
-  //       });
+        track.title = track.title.rendered;
+        const content = track.content.rendered;
+        delete track.content;
+        track.layout = "track.njk";
+
+        let value = "---json\n";
+        value += JSON.stringify(track) + '\n';
+        value += "---";
+        value += content;
+        fs.writeFile(`./src/content/tracks/${track.slug}.md`, value, function(
+          err
+        ) {
+          if (err) {
+            return console.log(err);
+          }
+
+          console.log(`The track "${track.title}" was saved!`);
+        });
       });
       // done();
     });

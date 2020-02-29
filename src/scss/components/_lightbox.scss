@@ -24,6 +24,11 @@
     background-color: rgba(0, 0, 0, 0.9);
     display: none;
     transition: opacity 0.15s ease;
+    &[data-type="iframe"]{
+      .lightbox--wrap, .lightbox {
+        height: 100%;
+      }
+    }
   }
 
   &--content {
@@ -33,6 +38,7 @@
     background-color: #fff;
     iframe {
       border: 0;
+      height: 100%;
     }
   }
 
