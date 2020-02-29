@@ -15,6 +15,15 @@ Array.prototype.forEach.call(
   }
 );
 
+let header = document.querySelector('.header__nav');
+
+if(header){
+  header.addEventListener('click', e => {
+    e.stopPropagation();
+    document.getElementById('header__checkbox').checked = false;
+  });
+}
+
 // if(Modernizr.webaudio){
 Array.prototype.forEach.call(
   document.querySelectorAll(".RecordPlayer"),
