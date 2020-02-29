@@ -8,7 +8,7 @@
   "scripts": {
     "getcontent": "node ./getContent.js",
     "assets": "webpack --env production",
-    "build": "assets && eleventy",
+    "build": "npm run assets && eleventy",
     "compile": "eleventy",
     "start": "npm run devserve",
     "test": "echo \"No test\"",
