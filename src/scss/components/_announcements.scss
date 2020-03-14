@@ -1,8 +1,58 @@
 .announcements {
   color: $white;
+  height: 100%;
+  top: 0;
+  height: 100%;
+  &.glide {
+    height: 100%;
+    position: absolute;
+  }
+  .glide__track {
+    height: 100%;
+  }
+  .glide__slides {
+    margin: 0;
+    height: 100%;
+  }
+  .glide__slide {
+    position: relative;
+  }
   .button {
     font-size: 36px;
     line-height: 1.7em;
+  }
+  &__cta, &__prev, &__next {
+
+  }
+  &__prev, &__next {
+    position: absolute;
+    top: 50%;
+    padding: 0;
+    background: none;
+    border: 0;
+    width: 70px;
+    height: 70px;
+    z-index: 5;
+    svg {
+      display: block;
+      width: 30px;
+      height: 18px;
+      stroke: $white;
+      stroke-width: 1px;
+      margin: auto;
+    }
+  }
+  &__prev {
+    right: 0;
+    svg {
+      transform: rotate(-90deg);
+    }
+  }
+  &__next {
+    left: 0;
+    svg {
+      transform: rotate(90deg);
+    }
   }
   &__cta {
     position: absolute;

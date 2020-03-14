@@ -3,19 +3,43 @@
 
 {% block body %}
   <div class="fullpage fullpage--white section">
-    <div class="announcements">
-      {% for announcement in announcements.slides %}
-        <div class="announcements__slide">
-          <div class="fitimg">
-            {{rimg(announcement.img.landscape, announcement.img.portrait)}}
-          </div>
-          {% if announcement.slide_type == 'banner' and announcement.slide_link %}
-            <a class="announcements__cta button" href="{{announcement.slide_link}}">
-              {{announcement.link_text if announcement.link_text else "MORE"}}
-            </a>
-          {% endif %}
-        </div>
-      {% endfor %}
+    <div class="announcements glide">
+      <div class="glide__track" data-glide-el="track">
+        <ul class="glide__slides">
+          {% for announcement in announcements.slides %}
+            <li class="glide__slide">
+              <div class="announcements__slide">
+                {% if announcement.slide_type == "video" %}
+                  <div class="fitimg videoplayer" data-video="{{announcement.video}}">
+                    {{rimg(announcement.img.landscape, announcement.img.portrait)}}
+                  </div>
+                {% else  %}
+                  <div class="fitimg">
+                    {{rimg(announcement.img.landscape, announcement.img.portrait)}}
+                  </div>
+                {% endif %}
+                {% if announcement.slide_type == 'banner' and announcement.slide_link %}
+                  <a class="announcements__cta button" href="{{announcement.slide_link}}">
+                    {{announcement.link_text if announcement.link_text else "MORE"}}
+                  </a>
+                {% endif %}
+              </div>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+      <div class="glide__arrows" data-glide-el="controls">
+        <button class="announcements__next" data-glide-dir="<">
+          <svg>
+            <use xlink:href="#downarr"></use>
+          </svg>
+        </button>
+        <button class="announcements__prev" data-glide-dir=">">
+          <svg>
+            <use xlink:href="#downarr"></use>
+          </svg>
+        </button>
+      </div>
     </div>
     <button class="fullpage__downarrow">
       <svg>
@@ -62,7 +86,7 @@
     </div>
   </div>
   <div class="section--white group">
-    <div class="section gridwrap divider gridwrap--flex">
+    <div class="section gridwrap divider gridwrap--flex section--contact">
       <a class="fullpage__anchor" id="contact"></a>
       <div class="col col--2-5">
         <ul class="social">
@@ -84,7 +108,7 @@
         <h2>SOCIAL</h2>
         <p>We can be found on a variety of platforms but we are most active on the above two, so for regular updates follow us.</p>
       </div>
-      <div class="col col--2-5">
+      <div class="col col--2-5 flexalign--right">
         <h2>LICENCING</h2>
         <p>All of our music is released under a creative commons by attribution share alike license.</p>
         <p><a href="/creative-commons" data-lightbox-type="iframe" class="button launch__lightbox">MORE</a></p>
