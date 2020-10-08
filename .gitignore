@@ -10,6 +10,7 @@ build/*
 data/*
 !data/.gitkeep
 !data/footer.js
+!data/socials.json
 src/content/posts/*
 src/content/index.md
 src/content/creative-commons.md
