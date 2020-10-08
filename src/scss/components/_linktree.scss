@@ -1,0 +1,12 @@
+// Lifted from https://codepen.io/fabiowallner/pen/ozkoYo
+
+.linktree {
+  text-align: left;
+  li {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

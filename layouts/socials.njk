@@ -1,0 +1,31 @@
+{% extends "./lightbox.njk" %}
+{% from "partials/rimg.njk" import rimg %}
+
+{% block body %}
+  <div class="gridwrap gridwrap--flex">
+    <div class="col--1-2 col--centred">
+      <ul class="linktree linktree--good">
+        <li>
+          <a href="{{socials.good.bandcamp}}" target="_blank">Bandcamp</a>
+        </li>
+        <li>
+          <a href="{{socials.good.mastodon}}" target="_blank">Mastodon</a>
+        </li>
+      </ul>
+      <ul class="linktree linktree--evil">
+        <li>
+          <a class="glitchtext" data-text="Facebook" href="{{socials.evil.facebook}}" target="_blank">Facebook</a>
+        </li>
+        <li>
+          <a data-text="Instagram" href="{{socials.evil.instagram}}" target="_blank">Instagram</a>
+        </li>
+        <li>
+          <a data-text="TikTok" href="{{socials.evil.tiktok}}" target="_blank">TikTok</a>
+        </li>
+        <li>
+          <a data-text="YouTube" href="{{socials.evil.youtube}}" target="_blank">YouTube</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+{% endblock %}
