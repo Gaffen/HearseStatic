@@ -1,31 +1,42 @@
-{% extends "./lightbox.njk" %}
-{% from "partials/rimg.njk" import rimg %}
+{% include "partials/head.njk" %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9918791-5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-{% block body %}
-  <div class="gridwrap gridwrap--flex">
-    <div class="col--1-2 col--centred">
-      <ul class="linktree linktree--good">
-        <li>
-          <a href="{{socials.good.bandcamp}}" target="_blank">Bandcamp</a>
-        </li>
-        <li>
-          <a href="{{socials.good.mastodon}}" target="_blank">Mastodon</a>
-        </li>
-      </ul>
-      <ul class="linktree linktree--evil">
-        <li>
-          <a class="glitchtext" data-text="Facebook" href="{{socials.evil.facebook}}" target="_blank">Facebook</a>
-        </li>
-        <li>
-          <a data-text="Instagram" href="{{socials.evil.instagram}}" target="_blank">Instagram</a>
-        </li>
-        <li>
-          <a data-text="TikTok" href="{{socials.evil.tiktok}}" target="_blank">TikTok</a>
-        </li>
-        <li>
-          <a data-text="YouTube" href="{{socials.evil.youtube}}" target="_blank">YouTube</a>
-        </li>
-      </ul>
-    </div>
+  gtag('config', 'UA-9918791-5');
+</script>
+<div class="gridwrap gridwrap--flex theme--black text-centre">
+  <div class="col--1-2 col--centred">
+    <h1>Our other socials:</h1>
+    <p>(Hearse Pileup uses Google Analytics on <em>this page only</em> for PR bullshit)</p>
+    <ul class="linktree linktree--good">
+      <li>
+        <a href="{{socials.good.bandcamp}}" target="_blank">Bandcamp</a>
+      </li>
+      <li>
+        <a href="{{socials.good.mastodon}}" target="_blank">Mastodon</a>
+      </li>
+    </ul>
+    <ul class="linktree linktree--evil">
+      <li>
+        <a class="glitchtext" data-text="EVIL" href="{{socials.evil.spotify}}" target="_blank">Spotify</a>
+      </li>
+      <li>
+        <a class="glitchtext" data-text="EVIL" href="{{socials.evil.facebook}}" target="_blank">Facebook</a>
+      </li>
+      <li>
+        <a class="glitchtext" data-text="EVIL" href="{{socials.evil.instagram}}" target="_blank">Instagram</a>
+      </li>
+      <li>
+        <a class="glitchtext" data-text="EVIL" href="{{socials.evil.tiktok}}" target="_blank">TikTok</a>
+      </li>
+      <li>
+        <a class="glitchtext" data-text="EVIL" href="{{socials.evil.youtube}}" target="_blank">YouTube</a>
+      </li>
+    </ul>
   </div>
-{% endblock %}
+</div>
+{% include "partials/foot.njk" %}

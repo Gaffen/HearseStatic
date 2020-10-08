@@ -1,12 +1,17 @@
-// Lifted from https://codepen.io/fabiowallner/pen/ozkoYo
-
 .linktree {
   text-align: left;
+  font-size: 30px;
+  font-weight: bold;
+  padding: 0;
   li {
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  a {
+    text-decoration: none;
+    padding: 30px;
   }
 }
