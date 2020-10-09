@@ -7,6 +7,25 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-9918791-5');
+
+  function linkClick(service, allegiance) {
+    gtag('event', 'socialclick', {
+      event_category: allegiance,
+      event_label: service
+    });
+  }
+
+  function addQueryListener(selector, args){
+    document.addEventListener('click', function(e) {
+      // loop parent nodes from the target to the delegation node
+      for (var target = e.target; target && target != this; target = target.parentNode) {
+        if (target.matches(selector)) {
+          linkClick(target.textContent, args);
+          break;
+        }
+      }
+    }, false);
+  }
 </script>
 <div class="gridwrap gridwrap--flex theme--black text-centre">
   <div class="col--1-2 col--centred">
@@ -42,4 +61,8 @@
     </ul>
   </div>
 </div>
+<script type="text/javascript">
+  addQueryListener('.linktree--good a', 'good');
+  addQueryListener('.linktree--evil a', 'evil');
+</script>
 {% include "partials/foot.njk" %}
