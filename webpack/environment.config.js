@@ -1,4 +1,3 @@
-const OptimizeJsPlugin = require("optimize-js-plugin");
 const resolvers = require("./resolvers.js");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const WebpackAssetsManifest = require("webpack-assets-manifest");
@@ -17,14 +16,10 @@ function isProduction(env) {
 
 function getPlugins(env) {
   let plugins = [new webpack.ProgressPlugin({ profile: false })];
-  console.log(env);
+  // console.log(env);
   return [
     new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
     new CleanWebpackPlugin(),
-    new OptimizeJsPlugin({
-      sourceMap: !isProduction(env)
-    }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new MiniCssExtractPlugin({
       filename: env == "development" ? "[name].css" : "[name]-[chunkhash].css",
       chunkFilename: "[id].css"
@@ -68,7 +63,7 @@ function getPlugins(env) {
 
 module.exports = (config, env, target) => {
   if (!isProduction(env)) {
-    config.devtool = "cheap-module-eval-source-map";
+    config.devtool = "eval-source-map";
   } else {
     // config.devtool = "eval-source-map";
   }

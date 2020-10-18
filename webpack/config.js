@@ -13,7 +13,7 @@ module.exports = env => {
     entry: {
       main: ["./src/js/main.js", "./src/scss/styles.scss"]
     },
-    mode: env,
+    mode: env.production ? "production" : "development",
     output: {
       path: assetsPath,
       filename: "development" ? "[name].js" : "[name]-[hash].js",
