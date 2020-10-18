@@ -1,5 +1,10 @@
 <template lang="html">
-  <div class="RecordPlayer" :data-record="recordUrl" :data-artwork="artworkObj" data-test>
+  <div
+    class="RecordPlayer"
+    :data-record="recordUrl"
+    :data-artwork="artworkObj"
+    data-test
+  >
     <a v-if="!hideFallback" :href="recordUrl">
       PLAY AUDIO
     </a>
@@ -16,7 +21,12 @@
       v-bind:height="canvasSize"
       v-on:mousedown="beginScrubbing"
     />
-    <img :src="artworkMainImg" :srcset="artworkSrcSet" sizes="160px" class="artwork"/>
+    <img
+      :src="artworkMainImg"
+      :srcset="artworkSrcSet"
+      sizes="160px"
+      class="artwork"
+    />
   </div>
 </template>
 
@@ -49,15 +59,15 @@ export default {
       recordUrl: this.record,
       artworkMainImg: artwork.main_img,
       artworkSrcSet: artwork.src_set,
-      artworkObj: this.artwork
+      artworkObj: this.artwork,
     };
   },
   mounted: function() {
-    if(Modernizr.webaudio){
+    if (Modernizr.webaudio) {
       this.hideFallback = true;
     }
     this.audioElement = document.createElement("audio");
-    this.audioElement.crossOrigin = 'anonymous';
+    this.audioElement.crossOrigin = "anonymous";
     this.audioElement.src = this.record;
     this.sUsrAg = navigator.userAgent;
 
@@ -83,9 +93,7 @@ export default {
         this.audioCtx = new (window.AudioContext ||
           window.webkitAudioContext)();
         this.analyser = this.audioCtx.createAnalyser();
-        this.source = this.audioCtx.createMediaElementSource(
-          this.audioElement
-        );
+        this.source = this.audioCtx.createMediaElementSource(this.audioElement);
         this.source.connect(this.analyser);
         this.source.connect(this.audioCtx.destination);
 
@@ -104,7 +112,7 @@ export default {
         this.createBarData();
       } else {
         // let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        if(!this.source) {
+        if (!this.source) {
           this.source = this.audioCtx.createMediaElementSource(
             this.audioElement
           );
@@ -288,8 +296,7 @@ export default {
       ctx.fill();
     },
     drawEqualizerBars() {
-      if(this.freqArray){
-
+      if (this.freqArray) {
         let ctx = this.discCtx;
         let disc = this.$refs.disc;
         let dataPoints = [];
@@ -314,7 +321,7 @@ export default {
           barSize = barSize >= 0 ? barSize : 0;
 
           // if (i === 0) {
-          // 	console.log(barSize, this.recordInnerSize);
+          //  console.log(barSize, this.recordInnerSize);
           // }
 
           ctx.save();
@@ -331,11 +338,11 @@ export default {
           // }
 
           // if (i === 3) {
-          // 	console.log(
-          // 		this.playPosition,
-          // 		i / dataPoints.length * 100,
-          // 		this.playPosition < i / dataPoints.length * 100
-          // 	);
+          //  console.log(
+          //    this.playPosition,
+          //    i / dataPoints.length * 100,
+          //    this.playPosition < i / dataPoints.length * 100
+          //  );
           // }
 
           ctx.arc(
@@ -395,7 +402,7 @@ export default {
       let discPos = this.$refs.disc.getBoundingClientRect();
       let centre = {
         x: discPos.x + discPos.width / 2,
-        y: discPos.y + discPos.height / 2
+        y: discPos.y + discPos.height / 2,
       };
       let mousePos = { x: e.clientX, y: e.clientY };
 
@@ -414,8 +421,8 @@ export default {
       this.scrubbing = false;
       window.removeEventListener("mouseup", this.finishScrubbing);
       window.removeEventListener("mousemove", this.scrub);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -426,6 +433,7 @@ export default {
   position: relative;
   width: 160px;
   height: 160px;
+  margin: auto;
 }
 
 .disc {

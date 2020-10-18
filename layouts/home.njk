@@ -69,7 +69,7 @@
     {% for track in music %}
       <div class="record">
         {% vue { component:"RecordPlayer", props: { record: track.audio, artwork: track.cover_art } } %}
-        <h3>{{track.title | upper}}</h3>
+        <h3>{{track.title | replace("&#8217;", "'") | upper}}</h3>
         <p><a class="button button--black  launch__lightbox" href="/tracks/{{track.slug}}"  data-lightbox-type="iframe">MORE</a></p>
       </div>
     {% endfor %}
