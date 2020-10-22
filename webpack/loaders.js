@@ -9,9 +9,9 @@ module.exports = function() {
       {
         loader: MiniCssExtractPlugin.loader,
         options: {
-          importLoaders: 1
-        }
-      }
+          importLoaders: 1,
+        },
+      },
     ],
     sassLoaders = [
       MiniCssExtractPlugin.loader,
@@ -20,24 +20,16 @@ module.exports = function() {
         options: {
           importLoaders: 1,
           sourceMap: !production,
-          url: false
-        }
+          url: false,
+        },
       },
-      {
-        loader: "postcss-loader",
-        options: {
-          plugins: function(e) {
-            return [autoprefixer(["last 2 version", "> 1%", "ie 9", "ie 8"])];
-          },
-          sourceMap: !production
-        }
-      },
+      "postcss-loader",
       {
         loader: "sass-loader", // compiles Sass to CSS
         options: {
-          sourceMap: !production
-        }
-      }
+          sourceMap: !production,
+        },
+      },
     ];
 
   return [
@@ -47,47 +39,45 @@ module.exports = function() {
       options: {
         emitFile: false,
         name: "[name].[ext]",
-        publicPath: "fonts"
+        publicPath: "fonts",
       },
-      exclude: /src\/svg/
+      exclude: /src\/svg/,
     },
     {
       test: /\.(png|jpg|gif)$/,
       loader: "file-loader",
-      options: {}
+      options: {},
     },
     {
       test: /\.js?$/,
       exclude: /(node_modules|bower_components)/,
-      use: "babel-loader"
+      use: "babel-loader",
     },
     {
       test: /\.vue?$/,
-      use: "vue-loader"
+      use: "vue-loader",
     },
     {
       test: /\.css$/,
       exclude: /node_modules/,
-      use: cssLoaders
+      use: cssLoaders,
     },
     {
       test: /\.scss$/,
       exclude: /node_modules/,
-      use: sassLoaders
+      use: sassLoaders,
     },
     {
-      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-      use: {
-        loader: "svg-inline-loader",
-        options: {
-          removingTagAttrs: ["fill", "stroke"]
-        }
-      },
-      exclude: /src\/fonts/
+      test: /\.svg$/,
+      use: [
+        {
+          loader: "raw-loader",
+        },
+      ],
     },
     {
       test: /\.modernizrrc$/,
-      loader: "modernizr-loader!json-loader"
-    }
+      use: ["modernizr-loader", "json-loader"],
+    },
   ];
 };

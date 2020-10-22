@@ -53,7 +53,7 @@ module.exports = function(nunjucksEngine, settings) {
 
     const moduleScript = requireFromString(
       babel.transformSync(parsedComponent.script.content, {
-        presets: [["@babel/env", { modules: false, loose: true }]],
+        presets: [["@babel/preset-env", { modules: false, loose: true }]],
         plugins: ["@babel/plugin-transform-modules-commonjs"]
       }).code
     ).default;
