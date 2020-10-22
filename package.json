@@ -12,7 +12,7 @@
         "compile": "eleventy",
         "start": "npm run devserve",
         "test": "echo \"No test\"",
-        "devserve": "DEBUG=browser-sync-server:*,error:*,info:* NODE_ENV=development babel-node --presets @babel/preset-env ./serve.js",
+        "devserve": "DEBUG=browser-sync-server:*,error:*,info: NODE_ENV=development babel-node --presets @babel/preset-env ./serve.js",
         "spritesheet": "node ./svgsprite.js",
         "modernizr": "npx modernizr -c .modernizrrc.json -d src/js/modernizr.js -u",
         "generate": "npm run getcontent && npm run modernizr && npm run spritesheet && npm run build",

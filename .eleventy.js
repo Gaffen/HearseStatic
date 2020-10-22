@@ -11,6 +11,7 @@ const vueTag = require("./njktags/vue");
 // };
 
 module.exports = function(eleventyConfig) {
+  eleventyConfig.setUseGitIgnore(false);
 
   let nunjucksEnvironment = new Nunjucks.Environment(
     new Nunjucks.FileSystemLoader("layouts")
@@ -27,20 +28,19 @@ module.exports = function(eleventyConfig) {
     console.log(value);
     return `<pre>${value ? JSON.stringify(value) : "Variable undefined"}</pre>`;
   });
-  eleventyConfig.addCollection("tracks", collection => {
+  eleventyConfig.addCollection("tracks", (collection) => {
     let tracks = collection.getFilteredByGlob("src/content/tracks/*.md");
     return tracks;
   });
-
 
   return {
     dir: {
       input: "src/content",
       output: "build",
       includes: "../../layouts",
-      data: "../../data"
+      data: "../../data",
     },
     templateFormats: ["md", "njk"],
-    passthroughFileCopy: false
+    passthroughFileCopy: false,
   };
 };
