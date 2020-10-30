@@ -32,6 +32,10 @@ module.exports = function(eleventyConfig) {
     let tracks = collection.getFilteredByGlob("src/content/tracks/*.md");
     return tracks;
   });
+  eleventyConfig.addCollection("blog", (collection) => {
+    let blog = collection.getFilteredByGlob("src/content/blog/*.md");
+    return blog;
+  });
 
   return {
     dir: {
