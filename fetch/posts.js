@@ -37,7 +37,7 @@ module.exports = function() {
     return {
       output: value,
       writePath: `blog/${post.slug}.md`,
-      title: post.title,
+      title: post.title.rendered,
     };
   });
 };

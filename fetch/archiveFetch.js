@@ -25,7 +25,7 @@ module.exports = function(endpoint, formatCallback) {
             return console.log(err);
           }
 
-          console.log(`The track "${title}" was saved!`);
+          console.log(`The item "${title}" was saved!`);
         });
       });
       // done();
