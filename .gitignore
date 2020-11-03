@@ -20,3 +20,4 @@ src/content/tracks/*
 layouts/partials/sprite.svg
 node_modules
 /assets/*
+.env

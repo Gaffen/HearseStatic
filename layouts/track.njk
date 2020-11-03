@@ -9,7 +9,7 @@
           {{rimg(albumart.landscape, false, '(min-width: 1224px) 492px, (min-width: 720px) calc(50vw - 60px), calc(100vw - 40px)')}}
         </div>
         <div class="col--1-2 col trackinfo__description">
-          <h1>{{title}}</h1>
+          <h1>{{title | safe}}</h1>
           <div class="trackinfo__text">
             {{content | safe}}
           </div>
