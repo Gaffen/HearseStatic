@@ -39,7 +39,10 @@ function getPlugins(env) {
   ];
   // console.log(env);
   return [
-    new webpack.IgnorePlugin(/\.\/dev/, /\/config$/),
+    new webpack.IgnorePlugin({
+      resourceRegExp:/\.\/dev/, 
+      contextRegExp:/\/config$/
+    }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: env == "development" ? "[name].css" : "[name]-[chunkhash].css",

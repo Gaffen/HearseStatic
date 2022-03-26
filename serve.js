@@ -1,6 +1,6 @@
 import Promise from "bluebird";
 import co from "co";
-import debounce from "lodash.debounce";
+import debounce from "lodash/debounce";
 import compress from "compression";
 import config from "./webpack.config.js";
 import webpack from "webpack";
