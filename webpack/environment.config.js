@@ -13,7 +13,7 @@ const webpack = require("webpack");
 const assetsPath = path.resolve(__dirname, "..", "public", "assets");
 
 function isProduction(env) {
-  return env === "production";
+  return env.production;
 }
 
 function getPlugins(env) {
@@ -37,7 +37,6 @@ function getPlugins(env) {
       },
     }),
   ];
-  // console.log(env);
   return [
     new webpack.IgnorePlugin({
       resourceRegExp:/\.\/dev/, 
@@ -45,7 +44,7 @@ function getPlugins(env) {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: env == "development" ? "[name].css" : "[name]-[chunkhash].css",
+      filename: !env.production ? "[name].css" : "[name]-[chunkhash].css",
       chunkFilename: "[id].css",
     }),
     new WebpackAssetsManifest({

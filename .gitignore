@@ -21,3 +21,4 @@ layouts/partials/sprite.svg
 node_modules
 /assets/*
 .env
+/stats.json
