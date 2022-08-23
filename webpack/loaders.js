@@ -1,31 +1,26 @@
-const autoprefixer = require("autoprefixer");
+const autoprefixer = require('autoprefixer');
 
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const production = JSON.stringify(process.env) === "production";
+const { alias_webpack_importer } = require('./svelteAlias');
 
-module.exports = function() {
-  let cssLoaders = [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          importLoaders: 1,
-        },
-      },
-    ],
+const production = JSON.stringify(process.env) === 'production';
+
+module.exports = function (inline) {
+  let cssLoaders = [MiniCssExtractPlugin.loader, 'css-loader'],
     sassLoaders = [
       MiniCssExtractPlugin.loader,
       {
-        loader: "css-loader",
+        loader: 'css-loader',
         options: {
           importLoaders: 1,
           sourceMap: !production,
           url: false,
         },
       },
-      "postcss-loader",
+      'postcss-loader',
       {
-        loader: "sass-loader", // compiles Sass to CSS
+        loader: 'sass-loader', // compiles Sass to CSS
         options: {
           sourceMap: !production,
         },
@@ -35,28 +30,59 @@ module.exports = function() {
   return [
     {
       test: /\.woff$|\.woff2?$|\.ttf$|\.eot$|\.otf$|\.svg$/,
-      loader: "file-loader",
+      loader: 'file-loader',
       options: {
         emitFile: false,
-        name: "[name].[ext]",
-        publicPath: "fonts",
+        name: '[name].[ext]',
+        publicPath: 'fonts',
       },
       exclude: /src\/svg/,
     },
     {
       test: /\.(png|jpg|gif)$/,
-      loader: "file-loader",
+      loader: 'file-loader',
       options: {},
     },
     {
       test: /\.js?$/,
       exclude: /(node_modules|bower_components)/,
-      use: "babel-loader",
+      use: 'babel-loader',
     },
     {
       test: /\.vue?$/,
-      use: "vue-loader",
+      use: 'vue-loader',
     },
+    {
+      test: /\.svelte?$/,
+      use: {
+        loader: 'svelte-loader',
+        options: {
+          preprocess: require('svelte-preprocess')({
+            sourceMap: !production,
+            postcss: {
+              plugins: [require('autoprefixer')()],
+            },
+            scss: {
+              importer: [alias_webpack_importer()],
+            },
+          }),
+          emitCss: !inline,
+          compilerOptions: {
+            hydratable: true,
+            generate: inline ? 'ssr' : 'dom',
+            dev: !production,
+            format: inline ? 'cjs' : 'esm',
+          },
+        },
+      },
+    },
+    // {
+    //   // required to prevent errors from Svelte on Webpack 5+, omit on Webpack 4
+    //   test: /node_modules\/svelte\/.*\.mjs$/,
+    //   resolve: {
+    //     fullySpecified: false,
+    //   },
+    // },
     {
       test: /\.css$/,
       exclude: /node_modules/,
@@ -71,13 +97,13 @@ module.exports = function() {
       test: /\.svg$/,
       use: [
         {
-          loader: "raw-loader",
+          loader: 'raw-loader',
         },
       ],
     },
     {
       test: /\.modernizrrc$/,
-      use: ["modernizr-loader", "json-loader"],
+      use: ['modernizr-loader', 'json-loader'],
     },
   ];
 };
