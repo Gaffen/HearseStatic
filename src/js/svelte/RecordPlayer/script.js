@@ -248,6 +248,9 @@ const runAnalysis = () => {
 
 const togglePlay = () => {
   if (!playing) {
+    if (!audioElement.src) {
+      audioElement.src = record;
+    }
     audioElement.play();
     playing = !playing;
     draw();
@@ -307,7 +310,6 @@ onMount(() => {
   }
   audioElement = document.createElement('audio');
   audioElement.crossOrigin = 'anonymous';
-  audioElement.src = record;
   sUsrAg = navigator.userAgent;
   eqBarCache = document.createElement('canvas');
   eqBarCacheWhite = document.createElement('canvas');
