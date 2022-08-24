@@ -1,8 +1,9 @@
-const path = require("path");
-const fs = require("fs");
-const Nunjucks = require("nunjucks");
+const path = require('path');
+const fs = require('fs');
+const Nunjucks = require('nunjucks');
 
-const vueTag = require("./njktags/vue");
+const vueTag = require('./njktags/vue');
+const svelteTag = require('./njktags/svelte');
 
 // const requireFromString = function(src, filename) {
 //   console.log(src);
@@ -10,26 +11,34 @@ const vueTag = require("./njktags/vue");
 //   return requireFromString(filename);
 // };
 
-module.exports = function(eleventyConfig) {
+module.exports = function (eleventyConfig) {
   eleventyConfig.setUseGitIgnore(false);
 
   let nunjucksEnvironment = new Nunjucks.Environment(
-    new Nunjucks.FileSystemLoader("layouts")
+    new Nunjucks.FileSystemLoader('layouts')
   );
 
-  eleventyConfig.setLibrary("njk", nunjucksEnvironment);
+  eleventyConfig.setLibrary('njk', nunjucksEnvironment);
 
   // Install custom tag
-  eleventyConfig.addNunjucksTag("vue", function(nunjucksEngine) {
+  eleventyConfig.addNunjucksTag('vue', function (nunjucksEngine) {
     return new vueTag(nunjucksEngine);
   });
+  // Install custom tag
+  // eleventyConfig.addNunjucksTag('svelte', function (nunjucksEngine) {
+  //   return new svelteTag(nunjucksEngine);
+  // });
 
-  eleventyConfig.addNunjucksFilter("debug", function(value) {
-    console.log(value);
-    return `<pre>${value ? JSON.stringify(value) : "Variable undefined"}</pre>`;
+  eleventyConfig.addNunjucksAsyncShortcode('svelte', (e, f) => {
+    return svelteTag(e, f);
   });
-  eleventyConfig.addCollection("tracks", (collection) => {
-    let tracks = collection.getFilteredByGlob("src/content/tracks/*.md");
+
+  eleventyConfig.addNunjucksFilter('debug', function (value) {
+    console.log(value);
+    return `<pre>${value ? JSON.stringify(value) : 'Variable undefined'}</pre>`;
+  });
+  eleventyConfig.addCollection('tracks', (collection) => {
+    let tracks = collection.getFilteredByGlob('src/content/tracks/*.md');
     return tracks;
   });
   //eleventyConfig.addCollection("blog", (collection) => {
@@ -39,12 +48,12 @@ module.exports = function(eleventyConfig) {
 
   return {
     dir: {
-      input: "src/content",
-      output: "build",
-      includes: "../../layouts",
-      data: "../../data",
+      input: 'src/content',
+      output: 'build',
+      includes: '../../layouts',
+      data: '../../data',
     },
-    templateFormats: ["md", "njk"],
+    templateFormats: ['md', 'njk'],
     passthroughFileCopy: false,
   };
 };

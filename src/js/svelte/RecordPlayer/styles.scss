@@ -1,0 +1,65 @@
+.RecordPlayer {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: auto;
+}
+
+.disc {
+  position: relative;
+  z-index: 1;
+  width: 160px;
+  height: 160px;
+  opacity: 0.75;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.toggle {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  top: 58px;
+  left: 58px;
+  border: 2px solid black;
+  background: white;
+  border-radius: 50%;
+  z-index: 2;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  svg {
+    fill: black;
+    width: 10px;
+    height: 10px;
+    display: block;
+    margin: auto;
+    display: block;
+  }
+}
+
+.artwork {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: calc(100% - 4px);
+  border-radius: 50%;
+}
+
+a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+}

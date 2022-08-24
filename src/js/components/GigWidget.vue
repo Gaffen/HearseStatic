@@ -13,21 +13,21 @@
 </template>
 
 <script>
-import request from "axios";
+import request from 'axios';
 
 export default {
-  data: function(stuff) {
+  data: function (stuff) {
     return {
-      title: "No new Hearse gigs for now",
+      title: 'No new Hearse gigs for now',
       description:
-        "we must be busy getting drunk, come back soon for more gigs!",
-      link: false
+        'we must be busy getting drunk, come back soon for more gigs!',
+      link: false,
     };
   },
-  mounted: function() {
+  mounted: function () {
     request
-      .get(process.env.GIGS_ENDPOINT + "?apikey=" + process.env.tourBoxKey)
-      .then(response => {
+      .get(process.env.GIGS_ENDPOINT + '?apikey=' + process.env.tourBoxKey)
+      .then((response) => {
         if (response.data.resultsPage.totalEntries != 0) {
           let event = response.data.resultsPage.results.event[0];
           this.title = null;
@@ -35,7 +35,7 @@ export default {
           this.link = event.uri;
         }
       });
-  }
+  },
 };
 </script>
 

@@ -68,7 +68,7 @@
     <a class="fullpage__anchor" id="music"></a>
     {% for track in music %}
       <div class="record">
-        {% vue { component:"RecordPlayer", props: { record: track.audio, artwork: track.cover_art } } %}
+        {% svelte "RecordPlayer", { record: track.audio, artwork: track.cover_art } %}
         <h3>{{track.title | upper | safe}}</h3>
         <p><a class="button button--black  launch__lightbox" href="/tracks/{{track.slug}}"  data-lightbox-type="iframe">MORE</a></p>
       </div>

@@ -1,34 +1,31 @@
-const resolvers = require("./resolvers.js");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const WebpackAssetsManifest = require("webpack-assets-manifest");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const url = require("url");
-const ImageMinimizerPlugin = require("image-minimizer-webpack-plugin");
-const TerserPlugin = require("terser-webpack-plugin");
+const resolvers = require('./resolvers.js');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const url = require('url');
+const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
-const path = require("path");
-const webpack = require("webpack");
-
-const assetsPath = path.resolve(__dirname, "..", "public", "assets");
+const webpack = require('webpack');
 
 function isProduction(env) {
   return env.production;
 }
 
-function getPlugins(env) {
+function getPlugins(env, local) {
   let plugins = [
     new webpack.ProgressPlugin({ profile: false }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
         plugins: [
           [
-            "imagemin-svgo",
+            'imagemin-svgo',
             {
               plugins: [
                 // SVGO options is here "https://github.com/svg/svgo#what-it-can-do"
                 {
-                  removeAttrs: ["fill", "stroke"],
+                  removeAttrs: ['fill', 'stroke'],
                 },
               ],
             },
@@ -37,43 +34,40 @@ function getPlugins(env) {
       },
     }),
   ];
-  return [
+  const pluginList = [
     new webpack.IgnorePlugin({
-      resourceRegExp:/\.\/dev/, 
-      contextRegExp:/\/config$/
+      resourceRegExp: /\.\/dev/,
+      contextRegExp: /\/config$/,
     }),
-    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: !env.production ? "[name].css" : "[name]-[chunkhash].css",
-      chunkFilename: "[id].css",
+      filename: !env.production ? '[name].css' : '[name]-[chunkhash].css',
+      chunkFilename: '[id].css',
     }),
     new WebpackAssetsManifest({
-      output: "../../data/manifest.json",
+      output: '../../data/manifest.json',
       transform: (assets, manifest) => {
         let vueComponents = {};
         Object.keys(manifest.compiler.records).forEach((e) => {
-          if (e.includes(".vue?")) {
+          if (e.includes('.vue?')) {
             const compName = e
               .match(/\/(.*)\.vue/)[1]
-              .split("/")
+              .split('/')
               .pop();
-            vueComponents[compName] = url.parse(e.split(" ")[1], true).query.id;
+            vueComponents[compName] = url.parse(e.split(' ')[1], true).query.id;
           }
         });
         let output = {},
           re = /(?:\.([^.]+))?$/;
         output.vue = vueComponents;
         Object.keys(assets).forEach((assetName) => {
-          const batchName = assetName.replace(/\.[^/.]+$/, ""),
+          const batchName = assetName.replace(/\.[^/.]+$/, ''),
             outputName = assets[assetName];
-
-          if (typeof output[batchName] == "undefined") {
+          if (typeof output[batchName] == 'undefined') {
             output[batchName] = {};
           }
-
-          if (outputName.endsWith(".js")) {
+          if (outputName.endsWith('.js')) {
             output[batchName].js = outputName;
-          } else if (outputName.endsWith(".css")) {
+          } else if (outputName.endsWith('.css')) {
             output[batchName].css = outputName;
           }
         });
@@ -82,13 +76,17 @@ function getPlugins(env) {
     }),
     new VueLoaderPlugin(),
   ];
+  if (!local) {
+    pluginList.push(new CleanWebpackPlugin());
+  }
+  return pluginList;
 }
 
 module.exports = (config, env, target) => {
   if (!isProduction(env)) {
-    config.devtool = "eval-source-map";
+    config.devtool = 'eval-source-map';
   } else {
-    // config.devtool = "eval-source-map";
+    config.devtool = false;
   }
   config.resolve = resolvers;
   // if (!isProduction(env)) {
@@ -97,9 +95,9 @@ module.exports = (config, env, target) => {
   //     hot: true
   //   };
   // }
-  config.plugins = getPlugins(env);
+  config.plugins = getPlugins(env, target === 'tag');
   config.externals = {
-    window: "window",
+    window: 'window',
   };
   config.optimization = {
     minimize: isProduction(env),

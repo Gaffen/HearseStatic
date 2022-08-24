@@ -1,0 +1,44 @@
+@import '@styles/settings/variables';
+
+.GigWidget {
+  border: 1px solid $med-grey;
+  display: flex;
+  text-decoration: none;
+  color: currentColor;
+  font-size: $body;
+  max-width: 300px;
+  height: 33px;
+  &.enabled:hover {
+    border-color: white;
+  }
+}
+.label {
+  color: $light-grey;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.text {
+  padding: 0px 8px 0px 9px;
+  margin: 1px 0px 4px 0px;
+  border-right: 1px solid $med-grey;
+  span:nth-child(1) {
+    line-height: 10px;
+  }
+  span:nth-child(2) {
+    font-size: 14px;
+    display: block;
+    line-height: 10px;
+  }
+}
+.content {
+  padding: 0px 10px;
+  margin: 4px 0;
+  overflow: hidden;
+  line-clamp: 2;
+  p {
+    margin: 0px;
+  }
+}
