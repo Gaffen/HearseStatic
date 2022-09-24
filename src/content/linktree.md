@@ -1,6 +1,3 @@
----json
-{
-"layout": "socials.njk"
-}
-
+---
+layout: 'socials.njk'
 ---

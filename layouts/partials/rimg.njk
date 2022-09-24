@@ -7,16 +7,16 @@
   {% if port and land %}
     <picture {{ 'class="' + class + '"' if class }} alt="{{alt}}">
 			<!--[if IE 9]><video style="display: none;"><![endif]-->
-      <source media="(orientation: landscape)" sizes="{{sizes}}" srcset="{{land.src_set}}">
-      <source media="(orientation: portrait)" sizes="{{sizes}}" srcset="{{port.src_set}}">
+      <source media="(orientation: landscape)" sizes="{{sizes}}" srcset="{{land.srcset}}">
+      <source media="(orientation: portrait)" sizes="{{sizes}}" srcset="{{port.srcset}}">
       <!--[if IE 9]></video><![endif]-->
-      <img src="{{land.main_img}}" srcset="{{land.src_set}}" sizes="{{sizes}}" alt="{{alt}}">
+      <img src="{{land.src}}" srcset="{{land.srcset}}" sizes="{{sizes}}" alt="{{alt}}">
     </picture>
   {% elseif land or port %}
     {% if land %}
-      <img src="{{land.main_img}}" {{ 'class="' + class + '"' if class }} sizes="{{sizes}}" srcset="{{land.src_set}}" alt="{{alt}}">
+      <img src="{{land.src}}" {{ 'class="' + class + '"' if class }} sizes="{{sizes}}" srcset="{{land.srcset}}" alt="{{alt}}">
     {% else %}
-      <img src="{{port.main_img}}" {{ 'class="' + class + '"' if class }} sizes="{{sizes}}" srcset="{{port.src_set}}" alt="{{alt}}">
+      <img src="{{port.src}}" {{ 'class="' + class + '"' if class }} sizes="{{sizes}}" srcset="{{port.srcset}}" alt="{{alt}}">
     {% endif %}
   {% else %}
     Please provide either portrait or landscape image
