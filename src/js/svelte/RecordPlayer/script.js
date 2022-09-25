@@ -303,7 +303,6 @@ const finishScrubbing = (e) => {
 };
 
 onMount(() => {
-  console.log('test');
   if (Modernizr.webaudio) {
     hideFallback = true;
   }

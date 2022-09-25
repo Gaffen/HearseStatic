@@ -1,4 +1,5 @@
 const { getArchive, writeMD } = require('./utils');
+const { getImgObj } = require('./imgMethods');
 
 const getTracks = async (directus) => {
   if (!directus) {
@@ -24,7 +25,7 @@ const getTracks = async (directus) => {
         ({ lyrics, album_art, audio, slug, ...details }) => ({
           content: lyrics,
           frontmatter: {
-            album_art: `${directus._url}/assets/${album_art.id}`,
+            album_art: getImgObj(album_art.id, directus._url, 'trackPageArt'),
             audio: `${directus._url}/assets/${audio.id}`,
             layout: 'track.njk',
             ...details,
