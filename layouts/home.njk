@@ -59,7 +59,7 @@
         </span>
         <div class="col col--3-5 col--centred">
           <h2>{{bio_headline}}</h2>
-          {{bio_copy}}
+          {{bio_copy | markdown | safe}}
         </div>
       </div>
     </div>
