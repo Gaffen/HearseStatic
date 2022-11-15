@@ -1,5 +1,5 @@
 {% include "partials/head.njk" %}
-<!-- Global site tag (gtag.js) - Google Analytics -->
+{# <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-9918791-5"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -26,7 +26,7 @@
       }
     }, false);
   }
-</script>
+</script> #}
 <div class="gridwrap gridwrap--flex theme--black text-centre">
   <div class="col--1-2 col--centred">
     {% if condition.show %}
@@ -37,7 +37,7 @@
       </p>
     {% endif %}
     <h1>Our socials:</h1>
-    <p>(Hearse Pileup uses Google Analytics on <em>this page only</em> for PR bullshit)</p>
+    {# <p>(Hearse Pileup uses Google Analytics on <em>this page only</em> for PR bullshit)</p> #}
     <ul class="linktree linktree--good">
       <li>
         <a href="{{socials.good.website}}">Website</a>
