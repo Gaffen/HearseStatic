@@ -1,5 +1,10 @@
 {
-  "campaign": "https://show.co/Nqkmc0A",
+  "campaign": {
+    "show": false,
+    "title": "We're All Going To Hell",
+    "link": "https://show.co/Nqkmc0A",
+    "action": "Pre-Save"
+  },
   "good": {
     "website": "https://hearsepileup.rip/",
     "mastodon": "https://metalhead.club/@hearsepileup",
