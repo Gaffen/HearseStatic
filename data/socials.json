@@ -1,21 +1,21 @@
 {
-    "campaign": {
-        "show": false,
-        "title": "We're All Going To Hell",
-        "link": "https://hearsepileup.bandcamp.com/track/were-all-going-to-hell",
-        "action": "Download"
-    },
-    "good": {
-        "website": "https://hearsepileup.rip/",
-        "mastodon": "https://metalhead.club/@hearsepileup",
-        "bandcamp": "https://hearsepileup.bandcamp.com/"
-    },
-    "evil": {
-        "youtube": "https://www.youtube.com/c/HearsePileup",
-        "twitter": "https://twitter.com/HearsePileup",
-        "instagram": "https://www.instagram.com/hearsepileup/",
-        "spotify": "https://open.spotify.com/artist/20grEPoCufXONjLBk5BZfo",
-        "facebook": "https://www.facebook.com/HearsePileup",
-        "tiktok": "https://www.tiktok.com/@hearsepileup"
-    }
+  "campaign": {
+    "show": true,
+    "title": "NEW GIG",
+    "link": "https://www.eventbrite.co.uk/e/632652319117",
+    "action": "TICKETS GET"
+  },
+  "good": {
+    "website": "https://hearsepileup.rip/",
+    "mastodon": "https://metalhead.club/@hearsepileup",
+    "bandcamp": "https://hearsepileup.bandcamp.com/"
+  },
+  "evil": {
+    "youtube": "https://www.youtube.com/c/HearsePileup",
+    "twitter": "https://twitter.com/HearsePileup",
+    "instagram": "https://www.instagram.com/hearsepileup/",
+    "spotify": "https://open.spotify.com/artist/20grEPoCufXONjLBk5BZfo",
+    "facebook": "https://www.facebook.com/HearsePileup",
+    "tiktok": "https://www.tiktok.com/@hearsepileup"
+  }
 }
