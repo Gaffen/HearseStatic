@@ -1,5 +1,10 @@
 {
-  "campaign": "https://show.co/Nqkmc0A",
+  "campaign": {
+    "show": true,
+    "title": "NEW GIG",
+    "link": "https://www.eventbrite.co.uk/e/632652319117",
+    "action": "TICKETS GET"
+  },
   "good": {
     "website": "https://hearsepileup.rip/",
     "mastodon": "https://metalhead.club/@hearsepileup",

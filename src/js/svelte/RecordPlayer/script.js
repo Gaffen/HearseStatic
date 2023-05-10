@@ -7,9 +7,7 @@ export let artwork;
 let maxRecordSize = 320 - 40;
 let maxRecordInnerSize = 100;
 let defaultArtwork =
-  typeof artwork === 'string'
-    ? JSON.parse(artwork).landscape
-    : artwork.landscape;
+  typeof artwork === 'string' ? JSON.parse(artwork) : artwork;
 let hideFallback = false;
 let playing = false;
 let scrubbing = false;
@@ -27,8 +25,8 @@ let eqBarCacheWhite = null;
 let eqBarWidth = 0;
 let eqBarRotation = 0;
 let eqSampleSize = 2;
-let artworkMainImg = defaultArtwork.main_img;
-let artworkSrcSet = defaultArtwork.src_set;
+let artworkMainImg = defaultArtwork.src;
+let artworkSrcSet = defaultArtwork.srcset;
 let audioElement = null;
 let sUsrAg = null;
 let disc;

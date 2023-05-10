@@ -1,10 +1,8 @@
-const register = require('svelte/register');
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const MemoryFs = require('memory-fs');
 const requireFromString = require('require-from-string');
-const svelte = require('svelte/compiler');
 
 const webpackConfig = require('../webpack/svelte');
 

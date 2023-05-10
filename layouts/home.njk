@@ -6,16 +6,16 @@
     <div class="announcements glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides">
-          {% for announcement in announcements.slides %}
+          {% for announcement in carousel %}
             <li class="glide__slide">
               <div class="announcements__slide">
-                {% if announcement.slide_type == "video" %}
-                  <div class="fitimg videoplayer" data-video="{{announcement.video}}">
-                    {{rimg(announcement.img.landscape, announcement.img.portrait)}}
+                {% if announcement.type == "video" %}
+                  <div class="fitimg videoplayer" data-video="{{announcement.video_link.iframe}}">
+                    {{rimg(announcement.image, announcement.portrait_image)}}
                   </div>
                 {% else  %}
                   <div class="fitimg">
-                    {{rimg(announcement.img.landscape, announcement.img.portrait)}}
+                    {{rimg(announcement.image, announcement.portrait_image)}}
                   </div>
                 {% endif %}
                 {% if announcement.slide_type == 'banner' and announcement.slide_link %}
@@ -41,16 +41,16 @@
         </button>
       </div>
     </div>
-    <button class="fullpage__downarrow">
+    <a class="fullpage__downarrow" href="#about">
       <svg>
         <use xlink:href="#downarr"></use>
       </svg>
-    </button>
+    </a>
   </div>
   <div class="fullpage fullpage--centred section">
     <a class="fullpage__anchor" id="about"></a>
     <div class="fitimg">
-      <img src="{{bandbio.bg.landscape.main_img}}" srcset="{{bandbio.bg.landscape.src_set}}" sizes="100%" alt="">
+      <img src="{{bio_bg.src}}" srcset="{{bio_bg.srcset}}" sizes="100vw" alt="">
     </div>
     <div class="gridwrap">
       <div class="iconbox">
@@ -58,17 +58,17 @@
           <svg><use xlink:href="#monogram"/></svg>
         </span>
         <div class="col col--3-5 col--centred">
-          <h2>{{bandbio.headline}}</h2>
-          {{bandbio.content | safe}}
+          <h2>{{bio_headline}}</h2>
+          {{bio_copy | markdown | safe}}
         </div>
       </div>
     </div>
   </div>
   <div class="fullpage fullpage--centred fullpage--white section">
     <a class="fullpage__anchor" id="music"></a>
-    {% for track in music %}
+    {% for track in tracks %}
       <div class="record">
-        {% svelte "RecordPlayer", { record: track.audio, artwork: track.cover_art } %}
+        {% svelte "RecordPlayer", { record: track.audio, artwork: track.album_art } %}
         <h3>{{track.title | upper | safe}}</h3>
         <p><a class="button button--black  launch__lightbox" href="/tracks/{{track.slug}}"  data-lightbox-type="iframe">MORE</a></p>
       </div>
@@ -81,8 +81,8 @@
         <svg><use xlink:href="#download"/></svg>
       </span>
       <h2>DIGITAL PRESS KIT</h2>
-      <p>{{dpk.title}}</p>
-      <p><a href="{{dpk.link}}" target="_blank" class="button">VISIT LINK</a></p>
+      <p>{{dpk_title}}</p>
+      <p><a href="{{dpk_link}}" target="_blank" class="button">VISIT LINK</a></p>
     </div>
   </div>
   <div class="section--white group">
@@ -131,7 +131,7 @@
           <a href="{{socials.evil.instagram}}" target="_blank">Instagram</a>&nbsp;&nbsp;/&nbsp;&nbsp;
           <a href="{{socials.good.bandcamp}}" target="_blank">Bandcamp</a>&nbsp;&nbsp;/&nbsp;&nbsp;
           <a href="{{socials.evil.spotify}}" target="_blank">Spotify</a>&nbsp;&nbsp;/&nbsp;&nbsp;
-          <a href="{{socials.good.mastodon}}" target="_blank">Mastodon</a>&nbsp;&nbsp;/&nbsp;&nbsp;
+          <a href="{{socials.good.mastodon}}" rel="me" target="_blank">Mastodon</a>&nbsp;&nbsp;/&nbsp;&nbsp;
           <a href="{{socials.evil.tiktok}}" target="_blank">TikTok</a>&nbsp;&nbsp;/&nbsp;&nbsp;
           <a href="{{socials.evil.youtube}}" target="_blank">YouTube</a>
         </p>

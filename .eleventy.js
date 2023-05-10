@@ -1,15 +1,10 @@
 const path = require('path');
 const fs = require('fs');
+const { EleventyRenderPlugin } = require('@11ty/eleventy');
 const Nunjucks = require('nunjucks');
 
 const vueTag = require('./njktags/vue');
 const svelteTag = require('./njktags/svelte');
-
-// const requireFromString = function(src, filename) {
-//   console.log(src);
-//   requireFromString(filename, src);
-//   return requireFromString(filename);
-// };
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.setUseGitIgnore(false);
@@ -18,16 +13,21 @@ module.exports = function (eleventyConfig) {
     new Nunjucks.FileSystemLoader('layouts')
   );
 
+  eleventyConfig.addFilter('markdown', function (value) {
+    let markdown = require('markdown-it')({
+      html: true,
+    });
+    return markdown.render(value);
+  });
+
+  eleventyConfig.addPlugin(EleventyRenderPlugin);
+
   eleventyConfig.setLibrary('njk', nunjucksEnvironment);
 
   // Install custom tag
   eleventyConfig.addNunjucksTag('vue', function (nunjucksEngine) {
     return new vueTag(nunjucksEngine);
   });
-  // Install custom tag
-  // eleventyConfig.addNunjucksTag('svelte', function (nunjucksEngine) {
-  //   return new svelteTag(nunjucksEngine);
-  // });
 
   eleventyConfig.addNunjucksAsyncShortcode('svelte', (e, f) => {
     return svelteTag(e, f);
@@ -41,10 +41,6 @@ module.exports = function (eleventyConfig) {
     let tracks = collection.getFilteredByGlob('src/content/tracks/*.md');
     return tracks;
   });
-  //eleventyConfig.addCollection("blog", (collection) => {
-  //  let blog = collection.getFilteredByGlob("src/content/blog/*.md");
-  //  return blog;
-  //});
 
   return {
     dir: {
