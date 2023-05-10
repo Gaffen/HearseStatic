@@ -29,11 +29,11 @@
 </script> #}
 <div class="gridwrap gridwrap--flex theme--black text-centre">
   <div class="col--1-2 col--centred">
-    {% if condition.show %}
+    {% if socials.campaign.show %}
       <h1 class="glitchtext nomargin--bottom" data-text="FUCK THE">Help us play the system:</h1>
       <p class="linktree--evil nomargin--top">
           <em>{{socials.campaign.title}}</em>
-          <a class="glitchtext underline" data-text="EVIL" href="{{socials.campaign.link}}" target="_blank"><strong>{{campaign.action}}</strong></a>
+          <a class="{% if socials.campaign.evil %}glitchtext underline{% else %}block{% endif %}" data-text="EVIL" href="{{socials.campaign.link}}" target="_blank"><strong>{{socials.campaign.action}}</strong></a>
       </p>
     {% endif %}
     <h1>Our socials:</h1>
