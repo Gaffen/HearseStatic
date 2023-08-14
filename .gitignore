@@ -7,6 +7,7 @@ build/*
 !build/browserconfig.xml
 !build/apple-touch-icon.png
 !build/android-chrome-*.png
+!build/robots.txt
 data/*
 !data/.gitkeep
 !data/footer.js
