@@ -2,6 +2,7 @@ const path = require('path');
 const fs = require('fs');
 const { EleventyRenderPlugin } = require('@11ty/eleventy');
 const Nunjucks = require('nunjucks');
+const { DateTime } = require('luxon');
 
 const vueTag = require('./njktags/vue');
 const svelteTag = require('./njktags/svelte');
@@ -17,7 +18,18 @@ module.exports = function (eleventyConfig) {
     let markdown = require('markdown-it')({
       html: true,
     });
-    return markdown.render(value);
+    const output = markdown.render(value);
+    return output;
+  });
+
+  eleventyConfig.addFilter('asGigDate', function (date) {
+    return DateTime.fromISO(date, {
+      zone: 'Europe/London',
+    }).toLocaleString(DateTime.DATE_SHORT);
+  });
+
+  eleventyConfig.addFilter('osmLink', function (coords) {
+    return `https://www.openstreetmap.org/?mlat=${coords[1]}&mlon=${coords[0]}#map=19/${coords[1]}/${coords[0]}`;
   });
 
   eleventyConfig.addPlugin(EleventyRenderPlugin);

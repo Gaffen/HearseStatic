@@ -1,0 +1,36 @@
+.gigcarousel {
+	&:before {
+		display: block;
+		content: ' ';
+		height: 1px;
+		background: $white;
+	}
+	&__item {
+		font-weight: 300;
+		font-size: $small;
+		text-align: left;
+	}
+	&__info {
+		h4,
+		h3,
+		p {
+			font-size: $small;
+			margin: 0;
+		}
+		h3,
+		p {
+			font-weight: 300;
+		}
+	}
+	&__fee,
+	&__location {
+		color: #c0c0c0;
+	}
+	&__more {
+		margin-top: 10px;
+		color: $white;
+		margin-bottom: 0;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+}

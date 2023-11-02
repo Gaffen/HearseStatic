@@ -1,0 +1,16 @@
+.calendar {
+	&__outer {
+		color: white;
+		display: block;
+		background: rgba(black, 0.8);
+		position: absolute;
+		top: 100%;
+		left: 0%;
+		width: 100%;
+		text-align: right;
+	}
+	&__next {
+		margin: 0;
+		font-size: $small;
+	}
+}
