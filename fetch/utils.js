@@ -6,27 +6,27 @@ require('dotenv').config();
 
 const directusStart = async (url) => {
 	const directus = new Directus(url);
-	let authenticated = false;
-	await directus.auth
-		.refresh()
-		.then(() => {
-			authenticated = true;
-		})
-		.catch(() => {});
+	// let authenticated = false;
+	// await directus.auth
+	// 	.refresh()
+	// 	.then(() => {
+	// 		authenticated = true;
+	// 	})
+	// 	.catch(() => {});
 
-	const email = process.env.DIRECTUS_USER;
-	const password = process.env.DIRECTUS_PASSWORD;
+	// const email = process.env.DIRECTUS_USER;
+	// const password = process.env.DIRECTUS_PASSWORD;
 
-	await directus.auth
-		.login({ email, password })
-		.then(() => {
-			authenticated = true;
-		})
-		.catch(() => {
-			console.log('Auth failed!');
-		});
+	// await directus.auth
+	// 	.login({ email, password })
+	// 	.then(() => {
+	// 		authenticated = true;
+	// 	})
+	// 	.catch(() => {
+	// 		console.log('Auth failed!');
+	// 	});
 
-	return authenticated ? directus : null;
+	return directus;
 };
 
 const writeMD = (data, destination, slug) => {

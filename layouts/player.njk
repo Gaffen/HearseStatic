@@ -1,0 +1,9 @@
+{% include "partials/head.njk" %}
+  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+  <div style="display: flex; width: 100vw; height: 100vh;">
+    <div style="margin: auto; padding: 20px 20px 0 20px;">
+      {% svelte "RecordPlayer", { record: track.audio, artwork: track.album_art } %}
+      <h3>{{track.title | upper | safe}}</h3>
+    </div>
+  </div>
+{% include "partials/foot.njk" %}
