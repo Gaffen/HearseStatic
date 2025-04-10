@@ -1,22 +1,13 @@
 .fullpage {
   min-height: 100vh;
   position: relative;
-  &--centred {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  &--white {
-    background: $white;
-    color: $black;
-  }
   &__anchor {
     position: absolute;
     top: 0;
     left: 0;
   }
   &__downarrow {
-    position: absolute;;
+    position: absolute;
     z-index: 3;
     bottom: 0;
     background: none;
@@ -24,6 +15,7 @@
     padding: 20px;
     margin-left: -35px;
     width: 70px;
+    left: 50%;
     svg {
       display: block;
       width: 30px;

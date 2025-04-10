@@ -2,52 +2,19 @@
 {% from "partials/rimg.njk" import rimg %}
 
 {% block body %}
-  <div class="fullpage fullpage--white section">
-    <div class="announcements glide">
-      <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">
-          {% for announcement in carousel %}
-            <li class="glide__slide">
-              <div class="announcements__slide">
-                {% if announcement.type == "video" %}
-                  <div class="fitimg videoplayer" data-video="{{announcement.video_link.iframe}}">
-                    {{rimg(announcement.image, announcement.portrait_image)}}
-                  </div>
-                {% else  %}
-                  <div class="fitimg">
-                    {{rimg(announcement.image, announcement.portrait_image)}}
-                  </div>
-                {% endif %}
-                {% if announcement.slide_type == 'banner' and announcement.slide_link %}
-                  <a class="announcements__cta button" href="{{announcement.slide_link}}">
-                    {{announcement.link_text if announcement.link_text else "MORE"}}
-                  </a>
-                {% endif %}
-              </div>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-      <div class="glide__arrows" data-glide-el="controls">
-        <button class="announcements__next" data-glide-dir="<">
-          <svg>
-            <use xlink:href="#downarr"></use>
-          </svg>
-        </button>
-        <button class="announcements__prev" data-glide-dir=">">
-          <svg>
-            <use xlink:href="#downarr"></use>
-          </svg>
-        </button>
-      </div>
+  <div class="section banner">
+    <div class="banner__cta">
+      <h1><a href="https://realise.hearsepileup.rip">REALISE</a></h1>
+      <p><a class="button" href="https://realise.hearsepileup.rip">OUT NOW</a></p>
     </div>
+    <iframe class="embed" width="100%" height="100%" src="https://realise.hearsepileup.rip/teaser"></iframe>
     <a class="fullpage__downarrow" href="#about">
       <svg>
         <use xlink:href="#downarr"></use>
       </svg>
     </a>
   </div>
-  <div class="fullpage fullpage--centred section">
+  <div class="section">
     <a class="fullpage__anchor" id="about"></a>
     <div class="fitimg">
       <img src="{{bio_bg.src}}" srcset="{{bio_bg.srcset}}" sizes="100vw" alt="">
@@ -64,7 +31,7 @@
       </div>
     </div>
   </div>
-  <div class="fullpage fullpage--centred fullpage--white section">
+  <div class="section--white section--centred section">
     <a class="fullpage__anchor" id="music"></a>
     {% for track in tracks %}
       <div class="record">

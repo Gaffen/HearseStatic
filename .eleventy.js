@@ -5,9 +5,14 @@ const Nunjucks = require('nunjucks');
 
 const vueTag = require('./njktags/vue');
 const svelteTag = require('./njktags/svelte');
+const dotenv = require('dotenv');
 
 module.exports = function (eleventyConfig) {
+  dotenv.config();
   eleventyConfig.setUseGitIgnore(false);
+
+  eleventyConfig.addGlobalData('umami.url', process.env.UMAMI_URL);
+  eleventyConfig.addGlobalData('umami.key', process.env.UMAMI_KEY);
 
   let nunjucksEnvironment = new Nunjucks.Environment(
     new Nunjucks.FileSystemLoader('layouts')
@@ -45,7 +50,7 @@ module.exports = function (eleventyConfig) {
   return {
     dir: {
       input: 'src/content',
-      output: 'build',
+      output: './build/',
       includes: '../../layouts',
       data: '../../data',
     },

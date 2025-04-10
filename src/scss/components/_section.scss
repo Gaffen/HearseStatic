@@ -1,0 +1,12 @@
+.section {
+	position: relative;
+	&--centred {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	&--white {
+		background: $white;
+		color: $black;
+	}
+}

@@ -1,10 +1,18 @@
 {
-  "campaign": {
-    "show": true,
-    "title": "Help us out - pre-save Realise on Spotify!",
-    "link": "https://show.co/c4Sh0zC",
-    "action": "PRE SAVE NOW"
-  },
+  "campaign": [
+    {
+      "show": true,
+      "title": "REALISE - online expreience out now!",
+      "link": "https://realise.hearsepileup.rip",
+      "action": "GO"
+    },
+    {
+      "show": true,
+      "title": "SPOTIFY RELEASE 02/07/24",
+      "link": "https://show.co/c4Sh0zC",
+      "action": "PRE-SAVE"
+    }
+  ],
   "good": {
     "website": "https://hearsepileup.rip/",
     "mastodon": "https://metalhead.club/@hearsepileup",
