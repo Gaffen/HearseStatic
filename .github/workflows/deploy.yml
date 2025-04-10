@@ -28,6 +28,8 @@ jobs:
           envkey_API: ${{ secrets.API_URL }}
           envkey_DIRECTUS_USER: ${{ secrets.DIRECTUS_USER }}
           envkey_DIRECTUS_PASSWORD: ${{ secrets.DIRECTUS_PASSWORD }}
+          envkey_UMAMI_URL: ${{ secrets.UMAMI_URL }}
+          envkey_UMAMI_KEY: ${{ secrets.UMAMI_KEY }}
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
